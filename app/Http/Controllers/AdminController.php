@@ -57,7 +57,17 @@ class AdminController extends Controller
                 ->where('is_deleted', 0)
                 ->get();
 
-        // dd($dataJumlahBalita);
+        $dataJumlahBalitaStuntingPerBulanIni = DB::table(DB::raw("
+                    (SELECT id_balita, status_stunting
+                    FROM pemeriksaan_balita
+                    WHERE status_stunting IN ('severely stunted', 'stunted')
+                    AND created_at BETWEEN CURRENT_DATE - INTERVAL 1 MONTH AND CURRENT_DATE)
+                    AS filtered_data
+                "))
+                ->select(DB::raw('COUNT(DISTINCT id_balita) AS total_balita'))
+                ->first();
+
+        // dd($dataJumlahBalitaStuntingPerBulanIni);
         return view('admin.dashboard', compact(
             'dataPemeriksaanBalita', 
 
@@ -65,7 +75,8 @@ class AdminController extends Controller
             'dataJumlahBalitaPerempuan', 
             
             'dataJumlahPosyandu',
-            'dataJumlahBalita'
+            'dataJumlahBalita',
+            'dataJumlahBalitaStuntingPerBulanIni'
         ));
     }
 
