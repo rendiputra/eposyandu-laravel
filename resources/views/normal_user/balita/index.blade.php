@@ -32,7 +32,7 @@
     {{-- <div class="card card-default color-palette-box"> --}}
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar Balita Di Keluarga</h3>
+          <h3 class="card-title">Daftar riwayat pemeriksaan balita di keluarga</h3>
         </div>
         
         <div class="card-body">
@@ -40,11 +40,16 @@
             <table id="example1" class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
+                  <th>Tanggal</th>
                   <th>Nama</th>
                   <th>NIK</th>
                   <th>Jenis Kelamin</th>
-                  <th>Berat saat lahir</th>
-                  <th>Tinggi saat lahir</th>
+                  <th>Berat badan</th>
+                  <th>Tinggi badan</th>
+                  <th>Lingkar lengan</th>
+                  <th>Lingkar kepala</th>
+                  <th>Status stunting</th>
+                  <th>Status berat badan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -52,18 +57,47 @@
                 @if (!empty($empty))
                   @foreach ($data as $d)
                   <tr>
+                    @php
+                      $date = date_create($d->created_at);
+                      $date = date_format($date,"Y/m/d");
+                    @endphp
+                    <td>{{ $date }}</td>
                     <td >{{ $d->nama }}</td>
                     <td>{{ $d->nik }}</td>
                     <td>{{ $d->jenis_kelamin }}</td>
-                    <td>{{ $d->berat_badan_lahir }}</td>
-                    <td>{{ $d->tinggi_badan_lahir }}</td>
+                    <td>{{ $d->berat_badan }} kg</td>
+                    <td>{{ $d->tinggi_badan }} cm</td>
+                    <td>{{ $d->lingkar_lengan_atas }} cm</td>
+                    <td>{{ $d->lingkar_kepala }} cm</td>
+                    <td>
+                      @if($d->status_stunting == "severely stunted")
+                        <span class="float-right badge bg-danger">{{ $d->status_stunting }}</span>
+                      @elseif($d->status_stunting == "stunted")
+                        <span class="float-right badge bg-warning">{{ $d->status_stunting }}</span>
+                      @elseif($d->status_stunting == "normal")
+                        <span class="float-right badge bg-success">{{ $d->status_stunting }}</span>
+                      @elseif($d->status_stunting == "tinggi")
+                        <span class="float-right badge bg-secondary">{{ $d->status_stunting }}</span>
+                      @endif
+                    </td>
+                    <td>
+                      @if($d->status_berat_badan == "severely underweight")
+                        <span class="float-right badge bg-danger">{{ $d->status_berat_badan }}</span>
+                      @elseif($d->status_berat_badan == "underweight")
+                        <span class="float-right badge bg-warning">{{ $d->status_berat_badan }}</span>
+                      @elseif($d->status_berat_badan == "normal")
+                        <span class="float-right badge bg-success">{{ $d->status_berat_badan }}</span>
+                      @elseif($d->status_berat_badan == "overweight")
+                        <span class="float-right badge bg-danger">{{ $d->status_berat_badan }}</span>
+                      @endif
+                    </td>
                     <td class="text-center"> 
-                      <a href="{{ route('user.riwayat_balita', $d->id_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-file-medical"></i> Riwayat pemeriksaan </a>
+                      <a href="{{ route('user.riwayat_balita', $d->id_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-file-medical"></i> Detail pemeriksaan </a>
                     </td>
                   </tr>
                   @endforeach
                 @else
-                  <td colspan="6" class="text-center">Tidak ada data</td>
+                  <td colspan="11" class="text-center">Tidak ada data</td>
                 @endif
               </tbody>
               {{-- <tfoot>
@@ -110,21 +144,21 @@
         order: [[0, 'desc']],
         // "buttons": ["excel", "pdf", "print"]
         "buttons": [
-          // {
-          //   extend: "excel",
-          //   exportOptions: {
-          //       columns: [0, 1, 2, 3, 4, 5, 6]
-          //   }}, 
-          // {
-          //   extend: "pdf",
-          //   exportOptions: {
-          //       columns: [0, 1, 2, 3, 4, 5, 6]
-          //   }
-          // }, 
+          {
+            extend: "excel",
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            }}, 
+          {
+            extend: "pdf",
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            }
+          }, 
           {
             extend: "print",
             exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6]
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             }
           }
         ]
