@@ -80,10 +80,10 @@
                     <td>{{ $date }}</td>
                     <td >{{ $d->nama }}</td>
                     <td>{{ $d->nik }}</td>
-                    <td>{{ $d->berat_badan }}</td>
-                    <td>{{ $d->tinggi_badan }}</td>
-                    <td>{{ $d->lingkar_lengan_atas }}</td>
-                    <td>{{ $d->lingkar_kepala }}</td>
+                    <td>{{ $d->berat_badan }} kg</td>
+                    <td>{{ $d->tinggi_badan }} cm</td>
+                    <td>{{ $d->lingkar_lengan_atas }} cm</td>
+                    <td>{{ $d->lingkar_kepala }} cm</td>
                     <td>
                       @if($d->status_stunting == "severely stunted")
                         <span class="float-right badge bg-danger">{{ $d->status_stunting }}</span>
@@ -103,7 +103,7 @@
                       @elseif($d->status_berat_badan == "normal")
                         <span class="float-right badge bg-success">{{ $d->status_berat_badan }}</span>
                       @elseif($d->status_berat_badan == "overweight")
-                        <span class="float-right badge bg-secondary">{{ $d->status_berat_badan }}</span>
+                        <span class="float-right badge bg-danger">{{ $d->status_berat_badan }}</span>
                       @endif
                     </td>
                     <td class="text-center"> 
