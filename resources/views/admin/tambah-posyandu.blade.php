@@ -46,7 +46,7 @@
               />
               @error('nama') <label class="text-danger">Jenis Posyandu</label> @enderror
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label for="exampleSelectRounded0">Jenis Posyandu</label>
               <select 
                 name="jenis_posyandu" 
@@ -57,7 +57,7 @@
                 <option value="lansia" @if (old('jenis_posyandu') == "lansia" ) selected @endif>Lansia</option>
               </select>
               @error('jenis_posyandu') <label class="text-danger">{{ $message }}</label> @enderror
-            </div>
+            </div> --}}
             <div class="form-group">
               <label for="exampleInput2">Alamat</label>
                 <textarea 

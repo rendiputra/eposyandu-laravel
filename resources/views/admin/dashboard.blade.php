@@ -48,10 +48,10 @@
       </div>
     
       <div class="col-lg-4 col-6">
-        <div class="small-box bg-warning">
+        <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{ $dataJumlahBalita[0]->jumlah }}</h3>
-            <p>Total Balita Stunting (test)</p>
+            <h3>{{ $dataJumlahBalitaStuntingPerBulanIni->total_balita }}</h3>
+            <p>Total Balita Stunting</p>
           </div>
           <div class="icon">
             <i class="ion ion-person"></i>
@@ -77,7 +77,7 @@
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
               <h3 class="card-title">Grafik Jumlah Pemeriksaan Perbulan</h3>
-              <a href="{{ route('kader.list_balita') }}">Lihat data</a>
+              <a href="{{ route('kader.list_pemeriksaan_balita') }}">Lihat data</a>
             </div>
           </div>
           <div class="card-body">

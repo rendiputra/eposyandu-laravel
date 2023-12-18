@@ -151,7 +151,6 @@
                 required>
                 <option value="1" @if (old('role') == "1" ) selected @endif>Pengguna</option>
                 <option value="2" @if (old('role') == "2" ) selected @endif>Kader</option>
-                <option value="3" @if (old('role') == "3" ) selected @endif>Kades</option>
                 <option value="4" @if (old('role') == "4" ) selected @endif>Admin</option>
               </select>
               @error('role') <label class="text-danger">{{ $message }}</label> @enderror

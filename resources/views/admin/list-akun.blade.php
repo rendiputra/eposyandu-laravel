@@ -49,7 +49,7 @@
                   <th>NIK</th>
                   <th>No telepon</th>
                   <th>role</th>
-                  <th>alamat</th>
+                  <th>Posyandu</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -71,7 +71,7 @@
                       Admin
                       @endif
                     </td>
-                    <td>{{ $d->alamat }}</td>
+                    <td>{{ $d->nama }}</td>
                     <td class="text-center"> 
                       <a href="{{ route('admin.update_akun', $d->id) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
                     </td>
@@ -119,7 +119,7 @@
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
-        "searching": false,
+        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,

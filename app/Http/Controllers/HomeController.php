@@ -34,10 +34,10 @@ class HomeController extends Controller
             case "2":
                 return redirect()->route('kader.dashboard');
                 break;
-            case "3":
-                echo "kades";
-                return redirect()->route('kades.dashboard');
-                break;
+            // case "3":
+            //     echo "kades";
+            //     return redirect()->route('kades.dashboard');
+            //     break;
             case "4":
                 return redirect()->route('admin.dashboard');
                 break;

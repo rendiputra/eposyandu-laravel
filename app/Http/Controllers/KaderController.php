@@ -30,7 +30,7 @@ class KaderController extends Controller
      * 
      * @return view
      */
-    public function dashboard()
+    public function dashboard2()
     {
         $user = Auth::user();
         
@@ -58,7 +58,75 @@ class KaderController extends Controller
     }
 
     /**
-     * Menampilkan daftar data pemeriksaan balita
+     * Menampilkan view dashboard kader
+     * 
+     * @return view
+     */
+    public function dashboard()
+    {
+        $user = Auth::user();
+
+        $posyandu = DB::table('posyandu')
+                ->select('nama')
+                ->where('id_posyandu', $user->id_posyandu)
+                ->first();
+
+        // dd(Carbon::now()->subYear(1));
+        $dataPemeriksaanBalita = DB::table('pemeriksaan_balita')
+                ->select('id_pemeriksaan_balita', 'created_at', DB::raw('YEAR(created_at) as tahun, month(created_at) as bulan, count(created_at) as jumlah'))
+                ->groupBy(DB::raw('month(created_at)'))
+                ->where([
+                    ['is_deleted', 0],
+                    ['created_at', '>', Carbon::now()->subYear()],
+                    ['id_posyandu', $user->id_posyandu],
+                ])->get();
+
+        $dataJumlahBalitaLaki = DB::table('balita')
+                ->select(DB::raw('count(id_balita) as jumlah'))
+                ->where([
+                    ['is_deleted', 0],
+                    ['jenis_kelamin', 'Laki-laki'],
+                    ['id_posyandu', $user->id_posyandu],
+                ])->get();
+        $dataJumlahBalitaPerempuan = DB::table('balita')
+                ->select(DB::raw('count(id_balita) as jumlah'))
+                ->where([
+                    ['is_deleted', 0],
+                    ['jenis_kelamin', 'Perempuan'],
+                    ['id_posyandu', $user->id_posyandu],
+                ])->get();
+
+        $dataJumlahBalita = DB::table('balita')
+                ->select(DB::raw('count(id_balita) as jumlah'))
+                ->where('is_deleted', 0)
+                ->get();
+
+        $dataJumlahBalitaStuntingPerBulanIni = DB::table(DB::raw("
+                    (SELECT id_balita, status_stunting
+                    FROM pemeriksaan_balita
+                    WHERE status_stunting IN ('severely stunted', 'stunted')
+                    AND id_posyandu = ".$user->id_posyandu."
+                    AND created_at BETWEEN CURRENT_DATE - INTERVAL 1 MONTH AND CURRENT_DATE)
+                    AS filtered_data
+                "))
+                ->select(DB::raw('COUNT(DISTINCT id_balita) AS total_balita'))
+                ->first();
+
+        // dd($dataJumlahBalitaStuntingPerBulanIni);
+        return view('kader.dashboard', compact(
+            'posyandu',
+            'dataPemeriksaanBalita', 
+
+            'dataJumlahBalitaLaki', 
+            'dataJumlahBalitaPerempuan', 
+            
+            'dataJumlahBalita',
+            'dataJumlahBalitaStuntingPerBulanIni'
+        ));
+    }
+
+    /**
+     * Menampilkan daftar data pemeriksaan balita berdasarkan id_posyandu user.
      * 
      * @return void
      */
@@ -81,10 +149,43 @@ class KaderController extends Controller
                 ['pemeriksaan_balita.id_posyandu', $user->id_posyandu],
             ])->orderByDesc('id_pemeriksaan_balita')
             ->get();
+
+        $posyandu = DB::table('posyandu')
+            ->select('nama')
+            ->where('id_posyandu', Auth::user()->id_posyandu)
+            ->first();
         
         $empty = count($data);
 
-        return view('kader.balita.index', compact(['data', 'empty', 'balita']));
+        return view('kader.balita.index', compact(['data', 'empty', 'balita', 'posyandu']));
+    }
+
+    /**
+     * Menampilkan detail data pemerksaan balita berdasarkan id balita.
+     * 
+     * @param integer id_balita
+     * @return void
+     */
+    public function detail_pemeriksaan_balita($id)
+    {
+        $user = Auth::user();
+
+        $data = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->select('pemeriksaan_balita.*', 'balita.*', 'pemeriksaan_balita.created_at as tanggal_periksa')
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['pemeriksaan_balita.id_posyandu', $user->id_posyandu],
+                ['pemeriksaan_balita.id_pemeriksaan_balita', $id],
+            ])->first();
+        
+        if(!$data)
+        {
+            return abort(404);
+        }
+
+        return view('kader.balita.detailpemeriksaan', compact('data'));
     }
 
     /**

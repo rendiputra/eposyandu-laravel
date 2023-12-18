@@ -415,8 +415,9 @@ class AdminController extends Controller
     public function list_akun() 
     {
         $data = DB::table('users')
-            ->where('is_delete', 0)
-            ->select('id', 'name', 'no_telp', 'nik', 'role', 'alamat')
+            ->join('posyandu', 'users.id_posyandu', 'posyandu.id_posyandu')
+            ->where('users.is_delete', 0)
+            ->select('users.id', 'users.name', 'users.no_telp', 'users.nik', 'users.role', 'users.alamat', 'posyandu.nama')
             ->get();
         
         $empty = count($data);
@@ -766,5 +767,37 @@ class AdminController extends Controller
         });
 
         return redirect()->route('admin.list_artikel')->with('sukses', 'Berhasil menghapus artikel.');
+    }
+
+    /**
+     * Menampilkan daftar data pemeriksaan balita semua posyandu
+     * 
+     * @return void
+     */
+    public function list_pemeriksaan_balita() 
+    {
+        $balita = DB::table('balita')
+            ->join('posyandu','balita.id_posyandu','posyandu.id_posyandu')
+            ->select('balita.id_balita', 'balita.nama', 'balita.nama_orangtua', 'posyandu.nama as nama_posyandu')
+            ->where([
+                ['balita.is_deleted', 0],
+            ])->orderByDesc('balita.id_balita')
+            ->get();
+
+        $data = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->join('posyandu','pemeriksaan_balita.id_posyandu','posyandu.id_posyandu')
+            ->select('pemeriksaan_balita.*', 'balita.nik', 'balita.nama', 'posyandu.nama as nama_posyandu')
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+            ])->orderByDesc('id_pemeriksaan_balita')
+            ->get();
+        
+        $empty = count($data);
+
+        // dd($data);
+
+        return view('admin.pemeriksaan-balita.index', compact(['data', 'empty', 'balita']));
     }
 }

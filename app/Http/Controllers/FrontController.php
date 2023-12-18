@@ -161,7 +161,7 @@ class FrontController extends Controller
                 ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
                 ->whereRaw('
                     pemeriksaan_balita.is_deleted = 0 AND
-                    pemeriksaan_balita.status = "Tidak Ideal" AND
+                    pemeriksaan_balita.status_stunting = "Tidak Ideal" AND
                     balita.jenis_kelamin = "Perempuan" AND
                     MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
                 ')->get();
@@ -171,7 +171,7 @@ class FrontController extends Controller
                 ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
                 ->whereRaw('
                     pemeriksaan_balita.is_deleted = 0 AND
-                    pemeriksaan_balita.status = "Tidak Ideal" AND
+                    pemeriksaan_balita.status_stunting = "Tidak Ideal" AND
                     balita.jenis_kelamin = "Laki-laki" AND
                     MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
                 ')->get();

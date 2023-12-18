@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\KaderController;
-use App\Http\Controllers\KadesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\NormalUserController;
@@ -52,6 +51,7 @@ Route::prefix('kader')->controller(KaderController::class)->middleware(['isKader
 
     // pemeriksaan balita
     Route::get('/pemeriksaan_balita', 'list_pemeriksaan_balita')->name('list_pemeriksaan_balita');
+    Route::get('/pemeriksaan_balita/detail/{id}', 'detail_pemeriksaan_balita')->name('detail_pemeriksaan_balita');
     Route::get('/pemeriksaan_balita/periksa', 'periksa_balita')->name('periksa_balita');
     Route::post('/pemeriksaan_balita/periksa', 'periksa_balita_act')->name('periksa_balita_act');
     Route::get('/pemeriksaan_balita/update/{id}', 'update_pemeriksaan_balita')->name('update_pemeriksaan_balita');
@@ -74,11 +74,6 @@ Route::prefix('kader')->controller(KaderController::class)->middleware(['isKader
     Route::post('/akun/update/{id}', 'update_akun_act')->name('update_akun_act');
     Route::post('/akun/update-password/{id}', 'update_password_act')->name('update_password_act');
     Route::post('/akun/delete/{id}', 'delete_akun')->name('delete_akun');
-});
-
-// kades
-Route::prefix('kades')->controller(KadesController::class)->middleware(['isKades'])->name('kades.')->group(function () {
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
 });
 
 // Admin
@@ -118,4 +113,7 @@ Route::prefix('admin')->controller(AdminController::class)->middleware(['isAdmin
     Route::get('/artikel/update/{id}', 'update_artikel')->name('update_artikel');
     Route::post('/artikel/update/{id}', 'update_artikel_act')->name('update_artikel_act');
     Route::post('/artikel/delete/{id}', 'delete_artikel')->name('delete_artikel');
+
+    // pemeriksaan balita
+    Route::get('/pemeriksaan_balita', 'list_pemeriksaan_balita')->name('list_pemeriksaan_balita');
 });

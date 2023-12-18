@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title','E-Posyandu | Desa Grujugan')
+@section('title','E-Posyandu')
 @section('css')
 <style>
 .card
@@ -33,11 +33,16 @@
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
               <li class="nav-item"><a class="nav-link fw-bold active" aria-current="page" href="#">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#tentang">Tentang E-Posyandu</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{ route('infografik_balita') }}">Info Grafik</a></li>
               <li class="nav-item"><a class="nav-link" href="#tka">Tumbuh Kembang Anak</a></li>
               <li class="nav-item"><a class="nav-link" href="#artikel">Artikel</a></li>
               <li class="nav-item"><a class="nav-link" href="#alamat">Alamat</a></li>
               <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
+            @guest
               <li class="nav-item"><a class="nav-link" href="{{route('login')}}">Masuk</a></li>
+            @else
+              <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Dashboard</a></li>
+            @endguest
             </ul>
           </div>
         </div>
@@ -55,7 +60,7 @@
             </div>
             <div class="col-md-7 col-lg-6 text-center text-md-start pt-5 pt-md-9">
 			        <p class="mt-3 mb-4 fs-1">Selamat datang di website</p>
-              <h1 class="mb-4 display-3 fw-bold">E-Posyandu<br>Desa Lorem</h1>
+              <h1 class="mb-4 display-3 fw-bold">E-Posyandu</h1>
 			        <a class="btn btn-lg btn-primary rounded-pill hover-top" href="#tentang" role="button">Eksplor</a>
             </div>
           </div>
@@ -78,8 +83,8 @@
             <div class="col-sm-10 col-xl-10 text-center">
             <p align="justify">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, dicta repellendus cumque veritatis voluptatum quae, magnam pariatur in suscipit perspiciatis eligendi? Dolores beatae voluptas perferendis eum id doloribus quia quaerat?
-              <br>
-              <br>
+            </p>
+            <p align="justify">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam tenetur adipisci et possimus enim quam quaerat sint dolorem. Provident quibusdam laboriosam eius fuga sunt quis. Minus odio provident nulla architecto, praesentium ullam id assumenda commodi aut, dolores eveniet neque tenetur iusto ipsum dolore ipsam aperiam! Aspernatur sunt repellendus dolor. Veritatis quas illum quia tempore sapiente cum quo facilis amet perspiciatis.
             </p>
             </div>

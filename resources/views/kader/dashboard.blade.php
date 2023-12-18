@@ -23,12 +23,23 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
+      <div class="col-lg-4 col-12">
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{ $posyandu->nama }}</h3>
+            <p>Nama Posyandu</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-home"></i>
+          </div>
+        </div>
+      </div>
     
-      <div class="col-lg-6 col-6">
+      <div class="col-lg-4 col-6">
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{ $dataJumlahBalita[0]->jumlah }}</h3>
-            <p>Total Balita Pada Posyandu</p>
+            <p>Total Balita</p>
           </div>
           <div class="icon">
             <i class="ion ion-person"></i>
@@ -36,11 +47,11 @@
         </div>
       </div>
     
-      <div class="col-lg-6 col-6">
-        <div class="small-box bg-warning">
+      <div class="col-lg-4 col-6">
+        <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{ $dataJumlahLansia[0]->jumlah }}</h3>
-            <p>Total Lansia Pada Posyandu</p>
+            <h3>{{ $dataJumlahBalitaStuntingPerBulanIni->total_balita }}</h3>
+            <p>Total Balita Stunting</p>
           </div>
           <div class="icon">
             <i class="ion ion-person"></i>
@@ -66,7 +77,7 @@
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
               <h3 class="card-title">Grafik Jumlah Pemeriksaan Perbulan</h3>
-              <a href="{{ route('kader.list_balita') }}">Lihat data</a>
+              <a href="{{ route('kader.list_pemeriksaan_balita') }}">Lihat data</a>
             </div>
           </div>
           <div class="card-body">
@@ -81,14 +92,13 @@
         <div class="card">
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
-              <h3 class="card-title">Grafik Balita dan Lansia</h3>
+              <h3 class="card-title">Grafik Balita (Berdasarkan jenis kelamin)</h3>
               <a href="{{ route('kader.list_balita') }}">Lihat data</a>
             </div>
           </div>
           <div class="card-body">
-      
             <div class="position-relative mb-4">
-              <canvas id="pieChart" height="100"></canvas>
+              <canvas id="grafikBalitaJk" height="100"></canvas>
             </div>
           </div>
         </div>
@@ -113,7 +123,7 @@
     @endforeach
   ];
 
-  const data = {
+  const dataPemeriksaanBulanan = {
     labels: labels,
     datasets: [
       {
@@ -125,17 +135,7 @@
           {{ $d->jumlah }},
         @endforeach
         ],
-      },
-      {
-      label: 'Lansia',
-      backgroundColor: 'rgb(255, 193, 7)',
-      borderColor: 'rgb(255, 193, 7)',
-      data: [
-        @foreach ($dataPemeriksaanLansia as $d)
-          {{ $d->jumlah }},
-        @endforeach
-        ],
-      },
+      }
     ]
   };
 
@@ -144,9 +144,9 @@
   //   data: data,
   //   options: {}
   // };
-  const config = {
+  const configPemeriksaanBulanan = {
     type: 'bar',
-    data: data,
+    data: dataPemeriksaanBulanan,
     options: {
       responsive: true,
       plugins: {
@@ -163,26 +163,23 @@
 
   const myChart = new Chart(
     document.getElementById('pemeriksaanBalitaChart'),
-    config
+    configPemeriksaanBulanan
   );
-</script>
 
-<script>
-
-  const data2 = {
-    labels: ['Balita', 'Lansia'],
+  const dataGrafikBalitaJk = {
+    labels: ['Laki-laki', 'Perempuan'],
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [{{ $dataJumlahBalita[0]->jumlah }}, {{ $dataJumlahLansia[0]->jumlah }}],
+        label: 'Balita',
+        data: [{{ $dataJumlahBalitaLaki[0]->jumlah }}, {{ $dataJumlahBalitaPerempuan[0]->jumlah }}],
         backgroundColor: ['rgb(40, 167, 69)', 'rgb(255, 193, 7)'],
       }
     ]
   };
 
-  const config2 = {
+  const configGrafikBalitaJk = {
     type: 'pie',
-    data: data2,
+    data: dataGrafikBalitaJk,
     options: {
       responsive: true,
       plugins: {
@@ -191,15 +188,15 @@
         },
         title: {
           display: true,
-          text: 'Grafik Balita dan Lansia'
+          text: 'Grafik Balita (Berdasarkan kelamin)'
         }
       }
     },
   };
 
-  const pieChart = new Chart(
-    document.getElementById('pieChart'),
-    config2
+  const grafikBalitaJk = new Chart(
+    document.getElementById('grafikBalitaJk'),
+    configGrafikBalitaJk
   );
 </script>
 @endsection

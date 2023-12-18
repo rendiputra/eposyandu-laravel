@@ -37,7 +37,7 @@
     {{-- <div class="card card-default color-palette-box"> --}}
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Daftar data pemeriksaan balita, di posyandu <b>{{ $posyandu->nama }}</b></h3>
+          <h3 class="card-title">Daftar data pemeriksaan balita</b></h3>
         </div>
         
         <div class="card-body">
@@ -47,7 +47,7 @@
                 <label>Pilih nama balita yang ingin diinput</label>
                 <select class="form-control select2" style="height: 120%; width: 300px" name="id_balita">
                   @foreach ($balita as $b)
-                    <option value="{{ $b->id_balita }}">{{ $b->nama }} - {{ $b->nama_orangtua }}</option>
+                    <option value="{{ $b->id_balita }}">{{ $b->nama }} - {{ $b->nama_orangtua }} ({{ $b->nama_posyandu }})</option>
                   @endforeach
                 </select>
               </div>
@@ -60,6 +60,7 @@
                   <th>Tanggal</th>
                   <th>Nama</th>
                   <th>NIK</th>
+                  <th>Posyandu</th>
                   <th>Berat Badan</th>
                   <th>Panjang Badan</th>
                   <th>Lingkar lengan</th>
@@ -80,6 +81,7 @@
                     <td>{{ $date }}</td>
                     <td >{{ $d->nama }}</td>
                     <td>{{ $d->nik }}</td>
+                    <td>{{ $d->nama_posyandu }}</td>
                     <td>{{ $d->berat_badan }}</td>
                     <td>{{ $d->tinggi_badan }}</td>
                     <td>{{ $d->lingkar_lengan_atas }}</td>
@@ -107,8 +109,7 @@
                       @endif
                     </td>
                     <td class="text-center"> 
-                      <a href="{{ route('kader.detail_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="btn btn-info"> <i class="fa-solid fa-circle-info"></i> Detail </a> 
-                      <a href="{{ route('kader.update_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="mt-2 btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
+                      <a href="{{ route('kader.update_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
                       <a type="submit" class="mt-2 btn btn-danger" onclick="if (confirm('Apakah anda yakin menghapus data {{ $d->nama }}?')) { 
                         event.preventDefault();
                         document.getElementById('delete-data{{ $d->id_pemeriksaan_balita }}').submit(); 
@@ -190,7 +191,7 @@
         order: [[0, 'desc']],
         "paging": true,
         "lengthChange": false,
-        "searching": false,
+        "searching": true,
         // "ordering": true,
         "info": true,
         "autoWidth": false,

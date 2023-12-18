@@ -84,7 +84,7 @@
               />
               @error('tinggi_badan') <label class="text-danger">{{ $message }}</label> @enderror
               <label class="text-secondary">Keterangan: *Pengukuran panjang badan dilakukan dalam keadaan anak
-                telentang</label>
+                telentang pada umur 0-24 bulan.</label>
             </div>
             <div class="form-group">
               <label for="lingkar_lengan_atas">Lingkar lengan atas</label>

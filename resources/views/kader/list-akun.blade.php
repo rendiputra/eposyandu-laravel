@@ -65,15 +65,15 @@
                       Pengguna
                       @elseif ($d->role == 2)
                       Kader
-                      @elseif ($d->role == 3)
-                      Kepala Desa
                       @elseif ($d->role == 4)
                       Admin
                       @endif
                     </td>
                     <td>{{ $d->alamat }}</td>
                     <td class="text-center"> 
-                      <a href="{{ route('kader.update_akun', $d->id) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
+                      @if ($d->role != 4)
+                        <a href="{{ route('kader.update_akun', $d->id) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
+                      @endif
                     </td>
                   </tr>
                   @endforeach

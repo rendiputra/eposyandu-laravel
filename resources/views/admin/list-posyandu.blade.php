@@ -33,7 +33,7 @@
     {{-- <div class="card card-default color-palette-box"> --}}
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Data posyandu yang terdaftar di desa</h3>
+          <h3 class="card-title">Data posyandu yang terdaftar pada sistem</h3>
         </div>
       
         <div class="card-body">

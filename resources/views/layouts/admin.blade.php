@@ -67,7 +67,7 @@
             $role = Auth::user()->role;
           @endphp
           <li class="nav-item">
-            <a href="@if($role == 1){{ route('user.dashboard') }}@elseif($role == 2){{ route('kader.dashboard') }}@elseif($role == 3){{ route('kades.dashboard') }}@elseif($role == 4){{ route('admin.dashboard') }}@endif" class="nav-link @if (Request::is('user/dashboard','user/dashboard/*', 'kader/dashboard','kader/dashboard/*', 'kades/dashboard','kades/dashboard/*', 'admin/dashboard','admin/dashboard/*')) active @endif">
+            <a href="@if($role == 1){{ route('user.dashboard') }}@elseif($role == 2){{ route('kader.dashboard') }}@elseif($role == 4){{ route('admin.dashboard') }}@endif" class="nav-link @if (Request::is('user/dashboard','user/dashboard/*', 'kader/dashboard','kader/dashboard/*', 'admin/dashboard','admin/dashboard/*')) active @endif">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
@@ -76,6 +76,12 @@
           </li>
   @if ($role == 4)
           <li class="nav-header">Admin Panel</li>
+          <li class="nav-item">
+            <a href="{{ route('admin.list_pemeriksaan_balita') }}" class="nav-link @if (Request::is('admin/pemeriksaan_balita','admin/pemeriksaan_balita/*')) active @endif">
+              <i class="nav-icon fa-solid fa-hospital-user"></i>
+              <p>Pemeriksaan Balita</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('admin.list_akun') }}" class="nav-link @if (Request::is('admin/akun','admin/akun/*')) active @endif ">
               <i class="nav-icon fa-solid fa-user-tie"></i>
@@ -108,6 +114,7 @@
           </li>
   @endif
   @if ($role == 2 || $role == 4)
+        @if($role == 2)
           <li class="nav-header">Data Pemeriksaan</li>
           <li class="nav-item">
             <a href="{{ route('kader.list_pemeriksaan_balita') }}" class="nav-link @if (Request::is('kader/pemeriksaan_balita','kader/pemeriksaan_balita/*')) active @endif">
@@ -115,6 +122,7 @@
               <p>Pemeriksaan Balita</p>
             </a>
           </li>
+        @endif
           @if ($role == 2)
           <li class="nav-header">Data Peserta</li>
           <li class="nav-item">

@@ -18,18 +18,17 @@
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-            <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url('/')}}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{route('article')}}">Artikel</a></li>
-            <li class="nav-item dropdown fw-bold active">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Info Grafik
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('infografik_balita') }}">Balita</a>
-                <a class="dropdown-item" href="{{ route('infografik_lansia') }}">Lansia</a>
-              </div>
-            </li>
+            <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('index') }}#tentang">Tentang E-Posyandu</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold active" href="{{ route('infografik_balita') }}">Info Grafik</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('index') }}#tka">Tumbuh Kembang Anak</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('article') }}">Artikel</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('index') }}#galeri">Galeri</a></li>
+          @guest
             <li class="nav-item"><a class="nav-link" href="{{route('login')}}">Masuk</a></li>
+          @else
+            <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Dashboard</a></li>
+          @endguest
           </ul>
         </div>
       </div>
@@ -106,7 +105,7 @@
                       <tbody>
                         <tr>
                           <th scope="row">1</th>
-                          <td>Tinggi Tidak Ideal</td>
+                          <td>Stunting</td>
                           <td>{{ $dataPemeriksaanBalitaLakiTinggiTidakIdeal[0]->jumlah }}</td>
                           <td>{{ $dataPemeriksaanBalitaPerempuanTinggiTidakIdeal[0]->jumlah }}</td>
                           <td>{{ $dataPemeriksaanBalitaPerempuanTinggiTidakIdeal[0]->jumlah + $dataPemeriksaanBalitaLakiTinggiTidakIdeal[0]->jumlah }}</td>
