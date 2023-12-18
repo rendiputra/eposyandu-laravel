@@ -109,7 +109,8 @@
                       @endif
                     </td>
                     <td class="text-center"> 
-                      <a href="{{ route('kader.update_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
+                      <a href="{{ route('admin.detail_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="btn btn-info"><i class="fa-solid fa-circle-info"></i> Detail </a> 
+                      <a href="{{ route('kader.update_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="mt-2 btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
                       <a type="submit" class="mt-2 btn btn-danger" onclick="if (confirm('Apakah anda yakin menghapus data {{ $d->nama }}?')) { 
                         event.preventDefault();
                         document.getElementById('delete-data{{ $d->id_pemeriksaan_balita }}').submit(); 

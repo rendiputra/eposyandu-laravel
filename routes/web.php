@@ -116,4 +116,5 @@ Route::prefix('admin')->controller(AdminController::class)->middleware(['isAdmin
 
     // pemeriksaan balita
     Route::get('/pemeriksaan_balita', 'list_pemeriksaan_balita')->name('list_pemeriksaan_balita');
+    Route::get('/pemeriksaan_balita/detail/{id}', 'detail_pemeriksaan_balita')->name('detail_pemeriksaan_balita');
 });

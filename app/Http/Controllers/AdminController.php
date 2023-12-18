@@ -800,4 +800,31 @@ class AdminController extends Controller
 
         return view('admin.pemeriksaan-balita.index', compact(['data', 'empty', 'balita']));
     }
+
+    /**
+     * Menampilkan detail data pemerksaan balita berdasarkan id balita.
+     * 
+     * @param integer id_balita
+     * @return void
+     */
+    public function detail_pemeriksaan_balita($id)
+    {
+        $user = Auth::user();
+
+        $data = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->select('pemeriksaan_balita.*', 'balita.*', 'pemeriksaan_balita.created_at as tanggal_periksa')
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['pemeriksaan_balita.id_pemeriksaan_balita', $id],
+            ])->first();
+        
+        if(!$data)
+        {
+            return abort(404);
+        }
+
+        return view('admin.pemeriksaan-balita.detailpemeriksaan', compact('data'));
+    }
 }
