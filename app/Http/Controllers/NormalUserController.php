@@ -63,12 +63,14 @@ class NormalUserController extends Controller
     {
         $user = Auth::user();
 
-        $data = DB::table('balita')
-            ->select('id_balita', 'nik', 'no_kk', 'nama', 'berat_badan_lahir', 'tinggi_badan_lahir', 'jenis_kelamin', 'is_deleted')
+        $data = DB::table('pemeriksaan_balita')
+            ->join('balita', 'pemeriksaan_balita.id_balita', 'balita.id_balita')
+            ->select('pemeriksaan_balita.*', 'balita.id_balita', 'balita.nik', 'balita.no_kk', 'balita.nama', 'balita.jenis_kelamin')
             ->where([
-                ['is_deleted', 0],
-                ['nik', $user->nik],
-            ])->orderByDesc('id_balita')
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['balita.nik_orangtua', $user->nik],
+            ])->orderByDesc('pemeriksaan_balita.id_pemeriksaan_balita')
             ->get();
         // dd($data);
         $empty = count($data);
@@ -187,5 +189,37 @@ class NormalUserController extends Controller
         });
 
         return redirect()->route('user.update_akun')->with('sukses', 'Berhasil mengganti password baru.');
+    }
+
+    /**
+     * Menampilkan detail data pemeriksaan balita berdasarkan id pemeriksaan balita.
+     * 
+     * @param integer id_balita
+     * @return void $data
+     */
+    public function detail_pemeriksaan_balita($id)
+    {
+        $user = Auth::user();
+
+        $data = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->select('pemeriksaan_balita.*', 'balita.*', 'pemeriksaan_balita.created_at as tanggal_periksa')
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['pemeriksaan_balita.id_pemeriksaan_balita', $id],
+            ])->first();
+        
+        if(!$data)
+        {
+            return abort(404);
+        }
+
+        // hitung umur
+        $tanggal_lahir = Carbon::parse($data->tanggal_lahir);
+        $tanggal_pemeriksaan = Carbon::parse($data->tanggal_periksa);
+        $umur_bulan = $tanggal_pemeriksaan->diffInMonths($tanggal_lahir);
+
+        return view('normal_user.balita.detailpemeriksaan', compact('data', 'umur_bulan'));
     }
 }

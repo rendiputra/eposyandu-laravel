@@ -92,7 +92,7 @@
                       @endif
                     </td>
                     <td class="text-center"> 
-                      <a href="{{ route('user.riwayat_balita', $d->id_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-file-medical"></i> Detail pemeriksaan </a>
+                      <a href="{{ route('user.detail_pemeriksaan_balita', $d->id_pemeriksaan_balita) }}" class="btn btn-primary"> <i class="fa-solid fa-circle-info"></i> Detail pemeriksaan </a>
                     </td>
                   </tr>
                   @endforeach
@@ -126,13 +126,13 @@
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-  {{-- <script src="{{ asset('plugins/jszip/jszip.min.js')}}"></script>
+  <script src="{{ asset('plugins/jszip/jszip.min.js')}}"></script>
   <script src="{{ asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
-  <script src="{{ asset('plugins/pdfmake/vfs_fonts.js')}}"></script> --}}
-  {{-- <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script> --}}
+  <script src="{{ asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+  <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-  {{-- <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script> --}}
-  {{-- <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script> --}}
+  <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+  <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>
 
   <!-- Select2 -->
   <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
@@ -147,18 +147,19 @@
           {
             extend: "excel",
             exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-            }}, 
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            }
+          }, 
           {
             extend: "pdf",
             exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
             }
           }, 
           {
             extend: "print",
             exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
             }
           }
         ]
