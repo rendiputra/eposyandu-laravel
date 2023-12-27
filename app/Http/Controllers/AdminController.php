@@ -802,7 +802,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Menampilkan detail data pemerksaan balita berdasarkan id balita.
+     * Menampilkan detail data pemeriksaan balita berdasarkan id pemeriksaan balita.
      * 
      * @param integer id_balita
      * @return void
@@ -825,6 +825,11 @@ class AdminController extends Controller
             return abort(404);
         }
 
-        return view('admin.pemeriksaan-balita.detailpemeriksaan', compact('data'));
+        // hitung umur
+        $tanggal_lahir = Carbon::parse($data->tanggal_lahir);
+        $tanggal_pemeriksaan = Carbon::parse($data->tanggal_periksa);
+        $umur_bulan = $tanggal_pemeriksaan->diffInMonths($tanggal_lahir);
+
+        return view('admin.pemeriksaan-balita.detailpemeriksaan', compact('data', 'umur_bulan'));
     }
 }
