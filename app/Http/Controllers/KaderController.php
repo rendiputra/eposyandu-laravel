@@ -185,7 +185,12 @@ class KaderController extends Controller
             return abort(404);
         }
 
-        return view('kader.balita.detailpemeriksaan', compact('data'));
+        // hitung umur
+        $tanggal_lahir = Carbon::parse($data->tanggal_lahir);
+        $tanggal_pemeriksaan = Carbon::parse($data->tanggal_periksa);
+        $umur_bulan = $tanggal_pemeriksaan->diffInMonths($tanggal_lahir);
+
+        return view('kader.balita.detailpemeriksaan', compact('data', 'umur_bulan'));
     }
 
     /**

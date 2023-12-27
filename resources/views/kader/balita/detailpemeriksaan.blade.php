@@ -54,6 +54,10 @@
                     <td>{{ $data->nama }}</td>
                   </tr>
                   <tr>
+                    <th>Umur</th>
+                    <td>{{ $umur_bulan }} Bulan</td>
+                  </tr>
+                  <tr>
                     <th>NIK</th>
                     <td>{{ $data->nik }}</td>
                   </tr>
