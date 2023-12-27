@@ -37,6 +37,7 @@ Route::prefix('user')->controller(NormalUserController::class)->middleware(['isN
     // balita
     Route::get('/balita', 'list_balita')->name('list_balita');
     Route::get('/balita/riwayat/{id}', 'riwayat_balita')->name('riwayat_balita');
+    Route::get('/pemeriksaan_balita/detail/{id}', 'detail_pemeriksaan_balita')->name('detail_pemeriksaan_balita');
 
     // update profile
     Route::get('/akun/update', 'update_akun')->name('update_akun');
