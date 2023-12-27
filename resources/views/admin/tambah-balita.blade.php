@@ -128,7 +128,7 @@
                 class="form-control @error('tanggal_lahir') is-invalid @enderror"
                 id="tanggal_lahir"
                 style="width: 150px"
-                value="@if (Session::get('tanggal_lahir')){{ old('tanggal_lahir') }}@else{{ "2019-01-22" }}@endif"
+                value="@if (Session::get('tanggal_lahir')){{ old('tanggal_lahir') }}@else{{ "2023-11-22" }}@endif"
                 required
               />
               @error('tanggal_lahir') <label class="text-danger">{{ $message }}</label> @enderror

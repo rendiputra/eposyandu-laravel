@@ -201,7 +201,7 @@
       </div>
     </div>
   </nav>
-       <section class="h-100 w-100" style="box-sizing: border-box; background-color: #f5f5f5">
+  {{-- <section class="h-100 w-100" style="box-sizing: border-box; background-color: #f5f5f5"> --}}
     
     <div class="content-4-1 d-flex flex-column align-items-center h-100 flex-lg-row"
       style="font-family: 'Poppins', sans-serif">
@@ -316,9 +316,9 @@
         }
       }
     </script>
-  </section> 
+  {{-- </section>  --}}
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    {{-- </body>
-  </html> --}}
+      </body>
+    </html>
 
 @endsection

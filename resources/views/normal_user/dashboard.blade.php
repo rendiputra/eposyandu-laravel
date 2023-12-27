@@ -24,7 +24,7 @@
   <div class="container-fluid">
     <div class="row">
     
-      <div class="col-lg-6 col-6">
+      <div class="col-lg-12 col-12">
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{ $dataJumlahBalita[0]->jumlah }}</h3>
@@ -36,17 +36,17 @@
         </div>
       </div>
     
-      <div class="col-lg-6 col-6">
+      {{-- <div class="col-lg-6 col-6">
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>{{ $dataJumlahLansia[0]->jumlah }}</h3>
-            <p>Total Lansia Di Keluarga</p>
+            <h3>123</h3>
+            <p>Total  Di Keluarga</p>
           </div>
           <div class="icon">
             <i class="ion ion-person"></i>
           </div>
         </div>
-      </div>
+      </div> --}}
     
       {{-- <div class="col-lg-3 col-6">
         <div class="small-box bg-danger">
@@ -65,14 +65,14 @@
         <div class="card">
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
-              <h3 class="card-title">Grafik Balita dan Lansia Di Keluarga</h3>
+              <h3 class="card-title">Grafik Balita Di Keluarga</h3>
               <a href="{{ route('user.list_balita') }}">Lihat data</a>
             </div>
           </div>
           <div class="card-body">
       
             <div class="position-relative mb-4">
-              @if (($dataJumlahBalita[0]->jumlah > 0 || $dataJumlahLansia[0]->jumlah > 0))
+              @if (($dataJumlahBalita[0]->jumlah > 0))
               <canvas id="pieChart" height="100px" width="100px"></canvas>
               @else
                 <div class="justify-content-center d-flex ">
@@ -144,12 +144,12 @@
 <script>
 
   const data = {
-    labels: ['Balita', 'Lansia'],
+    labels: ['Balita'],
     datasets: [
       {
         label: 'Dataset 1',
-        data: [{{ $dataJumlahBalita[0]->jumlah }}, {{ $dataJumlahLansia[0]->jumlah }}],
-        backgroundColor: ['rgb(40, 167, 69)', 'rgb(255, 193, 7)'],
+        data: [{{ $dataJumlahBalita[0]->jumlah }}],
+        backgroundColor: ['rgb(40, 167, 69)'],
       }
     ]
   };
@@ -165,7 +165,7 @@
         },
         title: {
           display: true,
-          text: 'Grafik Balita dan Lansia Di Keluarga' 
+          text: 'Grafik riwayat pemeriksaan balita Di Keluarga' 
         }
       }
     },
