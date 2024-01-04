@@ -66,8 +66,12 @@
                     <td>{{ $data->nik }}</td>
                   </tr>
                   <tr>
-                    <th>Nama orang tua</th>
-                    <td>{{ $data->nama_orangtua }}</td>
+                    <th>Nama Ibu</th>
+                    <td>{{ $data->nama_ibu }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nama Ayah</th>
+                    <td>{{ $data->nama_ayah }}</td>
                   </tr>
                   <tr>
                     <th>Tanggal pemeriksaan</th>

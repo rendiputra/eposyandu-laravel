@@ -69,7 +69,7 @@ class NormalUserController extends Controller
             ->where([
                 ['pemeriksaan_balita.is_deleted', 0],
                 ['balita.is_deleted', 0],
-                ['balita.nik_orangtua', $user->nik],
+                ['balita.nik_ibu', $user->nik],
             ])->orderByDesc('pemeriksaan_balita.id_pemeriksaan_balita')
             ->get();
         // dd($data);
