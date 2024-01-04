@@ -47,7 +47,7 @@
                 <label>Pilih nama balita yang ingin diinput</label>
                 <select class="form-control select2" style="height: 120%; width: 300px" name="id_balita">
                   @foreach ($balita as $b)
-                    <option value="{{ $b->id_balita }}">{{ $b->nama }} - {{ $b->nama_orangtua }}</option>
+                    <option value="{{ $b->id_balita }}">{{ $b->nama }} - {{ $b->nama_ibu }}</option>
                   @endforeach
                 </select>
               </div>

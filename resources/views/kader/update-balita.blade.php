@@ -79,33 +79,33 @@
               @error('no_kk') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
-              <label for="nik_orangtua">NIK Orang Tua</label>
+              <label for="nik_ibu">NIK Ibu</label>
               <input
-                name="nik_orangtua"
-                class="form-control @error('nik_orangtua') is-invalid @enderror"
-                id="nik_orangtua"
-                placeholder="NIK Orang Tua ..."
+                name="nik_ibu"
+                class="form-control @error('nik_ibu') is-invalid @enderror"
+                id="nik_ibu"
+                placeholder="NIK Ibu ..."
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 type = "number"
                 maxlength = "16"
                 min="0"
-                value="{{ $data->nik_orangtua }}"
+                value="{{ $data->nik_ibu }}"
                 required
               />
-              @error('nik_orangtua') <label class="text-danger">{{ $message }}</label> @enderror
+              @error('nik_ibu') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
-              <label for="nama_orangtua">Nama Orang Tua</label>
+              <label for="nama_ibu">Nama Ibu</label>
               <input
                 type="text"
-                name="nama_orangtua"
-                class="form-control @error('nama_orangtua') is-invalid @enderror"
-                id="nama_orangtua"
-                placeholder="Nama Orang Tua ..."
-                value="{{ $data->nama_orangtua }}"
+                name="nama_ibu"
+                class="form-control @error('nama_ibu') is-invalid @enderror"
+                id="nama_ibu"
+                placeholder="Nama Ibu ..."
+                value="{{ $data->nama_ibu }}"
                 required
               />
-              @error('nama_orangtua') <label class="text-danger">{{ $message }}</label> @enderror
+              @error('nama_ibu') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
               <label for="tanggal_lahir">Tanggal lahir</label>

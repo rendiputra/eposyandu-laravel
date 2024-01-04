@@ -44,7 +44,7 @@
                 <tr>
                   <th>Nama</th>
                   <th>NIK</th>
-                  <th>Orang Tua</th>
+                  <th>Ibu</th>
                   <th>No KK</th>
                   <th>Jenis Kelamin</th>
                   <th>Tanggal lahir</th>
@@ -57,7 +57,7 @@
                   <tr>
                     <td>{{ $d->nama }}</td>
                     <td >{{ $d->nik }}</td>
-                    <td>{{ $d->nama_orangtua }}</td>
+                    <td>{{ $d->nama_ibu }}</td>
                     <td>{{ $d->no_kk }}</td>
                     <td>{{ $d->jenis_kelamin }}</td>
                     <td>{{ $d->tanggal_lahir }}</td>

@@ -43,7 +43,6 @@
               <thead>
                 <tr>
                   <th>Nama</th>
-                  <th>Jenis Posyandu</th>
                   <th>Alamat</th>
                   <th>Aksi</th>
                 </tr>
@@ -53,7 +52,6 @@
                   @foreach ($data as $d)
                   <tr>
                     <td>{{ $d->nama }}</td>
-                    <td >{{ $d->jenis_posyandu }}</td>
                     <td>{{ $d->alamat }}</td>
                     <td class="text-center"> 
                       <a href="{{ route('admin.update_posyandu', $d->id_posyandu) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 

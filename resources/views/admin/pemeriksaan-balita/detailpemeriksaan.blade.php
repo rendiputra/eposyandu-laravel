@@ -62,12 +62,20 @@
                     <td>{{ $data->jenis_kelamin }}</td>
                   </tr>
                   <tr>
-                    <th>NIK</th>
-                    <td>{{ $data->nik }}</td>
+                    <th>NIK Ibu</th>
+                    <td>{{ $data->nik_ibu }}</td>
                   </tr>
                   <tr>
-                    <th>Nama orang tua</th>
-                    <td>{{ $data->nama_orangtua }}</td>
+                    <th>Nama Ibu</th>
+                    <td>{{ $data->nama_ibu }}</td>
+                  </tr>
+                  <tr>
+                    <th>NIK Ayah</th>
+                    <td>{{ $data->nik_ayah }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nama Ayah</th>
+                    <td>{{ $data->nama_ayah }}</td>
                   </tr>
                   <tr>
                     <th>Tanggal pemeriksaan</th>
