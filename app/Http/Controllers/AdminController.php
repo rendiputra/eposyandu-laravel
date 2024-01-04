@@ -848,4 +848,21 @@ class AdminController extends Controller
 
         return view('admin.pemeriksaan-balita.detailpemeriksaan', compact('data', 'umur_bulan'));
     }
+
+    /**
+     * Menampilkan daftar galeri
+     * 
+     * @return view data, empty
+     */
+    public function list_galeri() 
+    {
+        $data = DB::table('galeri')
+                ->where([
+                    ['is_deleted', 0]
+                ])->get();
+
+        $empty = count($data);
+
+        return view('admin.list-galeri', compact('data', 'empty'));
+    }
 }

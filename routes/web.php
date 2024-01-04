@@ -118,4 +118,12 @@ Route::prefix('admin')->controller(AdminController::class)->middleware(['isAdmin
     // pemeriksaan balita
     Route::get('/pemeriksaan_balita', 'list_pemeriksaan_balita')->name('list_pemeriksaan_balita');
     Route::get('/pemeriksaan_balita/detail/{id}', 'detail_pemeriksaan_balita')->name('detail_pemeriksaan_balita');
+
+    // galeri
+    Route::get('/galeri', 'list_galeri')->name('list_galeri');
+    Route::get('/galeri/tambah', 'tambah_galeri')->name('tambah_galeri');
+    Route::post('/galeri/tambah', 'tambah_galeri_act')->name('tambah_galeri_act');
+    Route::get('/galeri/update/{id}', 'update_galeri')->name('update_galeri');
+    Route::post('/galeri/update/{id}', 'update_galeri_act')->name('update_galeri_act');
+    Route::post('/galeri/delete/{id}', 'delete_galeri')->name('delete_galeri');
 });
