@@ -121,6 +121,7 @@ class FrontController extends Controller
                 ->select('pemeriksaan_balita.status_stunting', DB::raw('count(pemeriksaan_balita.created_at) as jumlah'))
                 ->whereRaw("
                     pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = 'severely stunted' AND
                     month(pemeriksaan_balita.created_at) = $nowMonth AND
                     year(pemeriksaan_balita.created_at) = $nowYear AND
                     balita.jenis_kelamin = 'Laki-laki'
@@ -160,22 +161,102 @@ class FrontController extends Controller
                     ['created_at', '>', Carbon::now()->subYear()]
                 ])->get();
 
-        $dataPemeriksaanBalitaPerempuanTinggiTidakIdeal = DB::table('pemeriksaan_balita')
+        $dataPemeriksaanBalitaPerempuanSangatStunting = DB::table('pemeriksaan_balita')
                 ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
                 ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
                 ->whereRaw('
                     pemeriksaan_balita.is_deleted = 0 AND
-                    pemeriksaan_balita.status_stunting = "Tidak Ideal" AND
+                    pemeriksaan_balita.status_stunting = "severely stunted" AND
                     balita.jenis_kelamin = "Perempuan" AND
                     MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
                 ')->get();
         
-        $dataPemeriksaanBalitaLakiTinggiTidakIdeal = DB::table('pemeriksaan_balita')
+        $dataPemeriksaanBalitaLakiSangatStunting = DB::table('pemeriksaan_balita')
                 ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
                 ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
                 ->whereRaw('
                     pemeriksaan_balita.is_deleted = 0 AND
-                    pemeriksaan_balita.status_stunting = "Tidak Ideal" AND
+                    pemeriksaan_balita.status_stunting = "severely stunted" AND
+                    balita.jenis_kelamin = "Laki-laki" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+
+        $dataPemeriksaanBalitaPerempuanStunting = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "stunted" AND
+                    balita.jenis_kelamin = "Perempuan" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+        
+        $dataPemeriksaanBalitaLakiStunting = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "stunted" AND
+                    balita.jenis_kelamin = "Laki-laki" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+
+        $dataPemeriksaanBalitaPerempuanBeratSangatKurang = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "severely underweight" AND
+                    balita.jenis_kelamin = "Perempuan" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+        
+        $dataPemeriksaanBalitaLakiBeratSangatKurang = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "severely underweight" AND
+                    balita.jenis_kelamin = "Laki-laki" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+
+        $dataPemeriksaanBalitaPerempuanBeratKurang = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "underweight" AND
+                    balita.jenis_kelamin = "Perempuan" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+        
+        $dataPemeriksaanBalitaLakiBeratKurang = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "underweight" AND
+                    balita.jenis_kelamin = "Laki-laki" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+
+        $dataPemeriksaanBalitaPerempuanBeratLebih = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "overweight" AND
+                    balita.jenis_kelamin = "Perempuan" AND
+                    MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
+                ')->get();
+        
+        $dataPemeriksaanBalitaLakiBeratLebih = DB::table('pemeriksaan_balita')
+                ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+                ->selectRaw('count(pemeriksaan_balita.id_balita) as jumlah')
+                ->whereRaw('
+                    pemeriksaan_balita.is_deleted = 0 AND
+                    pemeriksaan_balita.status_stunting = "overweight" AND
                     balita.jenis_kelamin = "Laki-laki" AND
                     MONTH(pemeriksaan_balita.created_at) = MONTH(CURRENT_DATE())
                 ')->get();
@@ -215,8 +296,17 @@ class FrontController extends Controller
             'dataJumlahBalitaUmur', 
 
             'dataJumlahBalita',
-            'dataPemeriksaanBalitaLakiTinggiTidakIdeal',
-            'dataPemeriksaanBalitaPerempuanTinggiTidakIdeal',
+            'dataPemeriksaanBalitaLakiSangatStunting',
+            'dataPemeriksaanBalitaPerempuanSangatStunting',
+            'dataPemeriksaanBalitaLakiStunting',
+            'dataPemeriksaanBalitaPerempuanStunting',
+
+            'dataPemeriksaanBalitaLakiBeratSangatKurang',
+            'dataPemeriksaanBalitaPerempuanBeratSangatKurang',
+            'dataPemeriksaanBalitaLakiBeratKurang',
+            'dataPemeriksaanBalitaPerempuanBeratKurang',
+            'dataPemeriksaanBalitaLakiBeratLebih',
+            'dataPemeriksaanBalitaPerempuanBeratLebih',
 
         ));
     }

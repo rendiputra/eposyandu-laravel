@@ -105,10 +105,38 @@
                       <tbody>
                         <tr>
                           <th scope="row">1</th>
+                          <td>Sangat Stunting</td>
+                          <td>{{ $dataPemeriksaanBalitaLakiSangatStunting[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanSangatStunting[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanSangatStunting[0]->jumlah + $dataPemeriksaanBalitaLakiSangatStunting[0]->jumlah }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
                           <td>Stunting</td>
-                          <td>{{ $dataPemeriksaanBalitaLakiTinggiTidakIdeal[0]->jumlah }}</td>
-                          <td>{{ $dataPemeriksaanBalitaPerempuanTinggiTidakIdeal[0]->jumlah }}</td>
-                          <td>{{ $dataPemeriksaanBalitaPerempuanTinggiTidakIdeal[0]->jumlah + $dataPemeriksaanBalitaLakiTinggiTidakIdeal[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaLakiStunting[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanStunting[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanStunting[0]->jumlah + $dataPemeriksaanBalitaLakiStunting[0]->jumlah }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Sangat kekurangan berat badan </td>
+                          <td>{{ $dataPemeriksaanBalitaLakiBeratSangatKurang[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratSangatKurang[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratSangatKurang[0]->jumlah + $dataPemeriksaanBalitaLakiBeratSangatKurang[0]->jumlah }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">4</th>
+                          <td>Kekurangan berat badan</td>
+                          <td>{{ $dataPemeriksaanBalitaLakiBeratKurang[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratKurang[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratKurang[0]->jumlah + $dataPemeriksaanBalitaLakiBeratKurang[0]->jumlah }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">5</th>
+                          <td>Risiko Berat badan lebih</td>
+                          <td>{{ $dataPemeriksaanBalitaLakiBeratLebih[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratLebih[0]->jumlah }}</td>
+                          <td>{{ $dataPemeriksaanBalitaPerempuanBeratLebih[0]->jumlah + $dataPemeriksaanBalitaLakiBeratLebih[0]->jumlah }}</td>
                         </tr>
                       </tbody>
                     </table>
