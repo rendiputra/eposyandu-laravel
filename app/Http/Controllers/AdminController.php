@@ -990,4 +990,22 @@ class AdminController extends Controller
             return redirect()->route('admin.list_galeri')->with('error','Gagal mengubah foto galeri!');
         }
     }
+
+    /**
+     * menghapus artikel
+     * 
+     * @param id_galeri $id
+     * 
+     * @return redirect
+     */
+    public function delete_galeri($id)
+    {
+        DB::transaction(function () use ($id){
+            $galeri = Galeri::findOrFail($id);
+            $galeri->is_deleted = 1;
+            $galeri->update();
+        });
+
+        return redirect()->route('admin.list_galeri')->with('sukses', 'Berhasil menghapus foto galeri.');
+    }
 }
