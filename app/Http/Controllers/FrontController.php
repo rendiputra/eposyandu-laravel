@@ -24,8 +24,12 @@ class FrontController extends Controller
                 ->orderby('updated_at','desc')
                 ->limit('3')
                 ->get();
+
+        $galeri = DB::Table('galeri')
+                ->where('is_deleted', false)
+                ->get();
         
-        return view('welcome',compact('artikel'));
+        return view('welcome',compact('artikel', 'galeri'));
     }
 
     /**

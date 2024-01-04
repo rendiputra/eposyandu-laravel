@@ -74,7 +74,7 @@
           </div>
         </div>
       </section>
-      <section class="py-6 pt-7 bg-primary-gradient">
+      <section class="py-6 pt-6 bg-primary-gradient">
         <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/dot.png')}});background-position:left bottom;background-size:auto;filter:contrast(1.5);">
         </div>
         <!--/.bg-holder-->
@@ -83,7 +83,7 @@
         </div>
         <!--/.bg-holder-->
 
-        <div class="container">
+        {{-- <div class="container">
           <div class="row">
             <div class="col-12 col-lg-4 order-0 order-sm-0 pe-6"><a class="text-decoration-none" href="#"><img class="img-fluid me-2" src="{{asset('asset/img/icons/footer-logo.png')}}" alt="" /><span class="fw-bold fs-1 text-light">E-Posyandu</span></a>
               <p class="mt-3 text-white">Posyandu provides progressive, and affordable healthcare, accessible on mobile and online for everyone</p>
@@ -98,14 +98,14 @@
             <div class="col-4 col-md-4 col-lg mb-3 order-2 order-sm-1">
               <h6 class="lh-lg fw-bold text-light">Alamat</h6>
               <ul class="list-unstyled mb-md-4 mb-lg-0">
-                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Desa Grujugan, Kecamatan Petanahan, Kebumen, Jawa Tengah, Indonesia.</span></li>
-                {{-- <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
-                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li> --}}
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Bekasi</span></li>
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
               </ul>
             </div>
           </div>
-        </div>
-        <div class="container pt-5">
+        </div> --}}
+        <div class="container">
           <div class="row">
             <div class="col-12">
               <div class="text-center">

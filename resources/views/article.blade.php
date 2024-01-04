@@ -62,7 +62,7 @@
               <div class="card rounded-3 shadow"><img class="card-img-top" src="{{asset('image/'.$a->image)}}" alt="" />
                 <div class="card-body p-4 text-center text-md-start">
                   <h5 class="fw-bold">{{ (strlen(strip_tags($a->title)) > 25 ) ? substr_replace(strip_tags($a->title),'...',25) : $a->title; }}</h5>
-                  <p class="card-text">{{ (strlen(strip_tags($a->description)) > 45 ) ? substr_replace(strip_tags($a->description),'...',50) : $a->description; }}</p><a class="stretched-link text-decoration-none" href="{{route('article-detail',$a->slug)}}" role="button">Lihat Selengkapnya
+                  <p class="card-text">{!! (strlen(strip_tags($a->description)) > 45 ) ? substr_replace(strip_tags($a->description),'...',50) : $a->description; !!}</p><a class="stretched-link text-decoration-none" href="{{route('article-detail',$a->slug)}}" role="button">Lihat Selengkapnya
                     <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
                     </svg></a>
@@ -81,7 +81,7 @@
           </div>
         </div>
       </section>
-      <section class="py-6 pt-7 bg-primary-gradient">
+      <section class="py-6 pt-6 bg-primary-gradient">
         <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/dot.png')}});background-position:left bottom;background-size:auto;filter:contrast(1.5);">
         </div>
         <!--/.bg-holder-->
@@ -90,7 +90,7 @@
         </div>
         <!--/.bg-holder-->
 
-        <div class="container">
+        {{-- <div class="container">
           <div class="row">
             <div class="col-12 col-lg-4 order-0 order-sm-0 pe-6"><a class="text-decoration-none" href="#"><img class="img-fluid me-2" src="{{asset('asset/img/icons/footer-logo.png')}}" alt="" /><span class="fw-bold fs-1 text-light">E-Posyandu</span></a>
               <p class="mt-3 text-white">Posyandu provides progressive, and affordable healthcare, accessible on mobile and online for everyone</p>
@@ -105,14 +105,15 @@
             <div class="col-4 col-md-4 col-lg mb-3 order-2 order-sm-1">
               <h6 class="lh-lg fw-bold text-light">Alamat</h6>
               <ul class="list-unstyled mb-md-4 mb-lg-0">
-                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Desa Grujugan, Kecamatan Petanahan, Kebumen, Jawa Tengah, Indonesia.</span></li>
-                {{-- <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
-                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li> --}}
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">BEKASI.</span></li>
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
               </ul>
             </div>
           </div>
-        </div>
-        <div class="container pt-5">
+        </div> --}}
+        {{-- <div class="container pt-5"> --}}
+        <div class="container">
           <div class="row">
             <div class="col-12">
               <div class="text-center">

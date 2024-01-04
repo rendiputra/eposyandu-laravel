@@ -74,7 +74,7 @@
         <div class="container-lg">
           <div class="row justify-content-center">
             <div class="col-auto text-center">
-              <h2 class="fw-bold">Tentang E-Posyandu</h2>
+              <h2 class="fw-bold">Tentang Posyandu</h2>
               <hr class="w-25 mx-auto text-dark" style="height:2px;" />
             </div>
           </div>
@@ -82,10 +82,10 @@
             <div class="pb-3"></div>
             <div class="col-sm-10 col-xl-10 text-center">
             <p align="justify">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, dicta repellendus cumque veritatis voluptatum quae, magnam pariatur in suscipit perspiciatis eligendi? Dolores beatae voluptas perferendis eum id doloribus quia quaerat?
+              Posyandu, singkatan dari Pos Pelayanan Terpadu, merupakan salah satu elemen penting dalam sistem pelayanan kesehatan masyarakat di Indonesia. Posyandu adalah unit pelayanan kesehatan yang berlokasi di tingkat desa atau kelurahan, dan menjadi tempat pelayanan kesehatan dasar yang terintegrasi untuk ibu dan balita. Di Posyandu, petugas kesehatan seperti bidan, kader kesehatan bekerja sama dalam memberikan layanan seperti pemeriksaan pertumbuhan balita, konsultasi ibu hamil, serta penyuluhan kesehatan kepada masyarakat setempat.
             </p>
             <p align="justify">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam tenetur adipisci et possimus enim quam quaerat sint dolorem. Provident quibusdam laboriosam eius fuga sunt quis. Minus odio provident nulla architecto, praesentium ullam id assumenda commodi aut, dolores eveniet neque tenetur iusto ipsum dolore ipsam aperiam! Aspernatur sunt repellendus dolor. Veritatis quas illum quia tempore sapiente cum quo facilis amet perspiciatis.
+              Posyandu memiliki peran kunci dalam upaya meningkatkan kesehatan masyarakat, terutama di daerah pedesaan yang mungkin sulit dijangkau oleh fasilitas kesehatan yang lebih besar. Program-program kesehatan seperti imunisasi, pencegahan malnutrisi. Selain itu, Posyandu juga berfungsi sebagai pusat informasi kesehatan dan edukasi untuk masyarakat, membantu dalam peningkatan kesadaran tentang pentingnya perawatan kesehatan. Dengan demikian, Posyandu memainkan peran vital dalam meningkatkan status kesehatan masyarakat Indonesia.
             </p>
             </div>
           </div>
@@ -507,7 +507,7 @@
               <div class="card rounded-3 shadow"><img class="card-img-top" src="{{asset('image/'.$a->image)}}" alt="" width="100%" loading="lazy"/>
                 <div class="card-body p-4 text-center text-md-start">
                   <h5 class="fw-bold">{{ (strlen(strip_tags($a->title)) > 25 ) ? substr_replace(strip_tags($a->title),'...',25) : $a->title; }}</h5>
-                  <p class="card-text">{{ (strlen(strip_tags($a->description)) > 45 ) ? substr_replace(strip_tags($a->description),'...',50) : $a->description; }}</p><a class="stretched-link text-decoration-none" href="{{route('article-detail',$a->slug)}}" role="button">Lihat Selengkapnya
+                  <p class="card-text">{!! (strlen(strip_tags($a->description)) > 45 ) ? substr_replace(strip_tags($a->description),'...',50) : $a->description; !!}</p><a class="stretched-link text-decoration-none" href="{{route('article-detail',$a->slug)}}" role="button">Lihat Selengkapnya
                     <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
                     </svg></a>
@@ -530,15 +530,15 @@
     
    
       <section id="galeri" class="py-5">
-        <div class="row flex-center">
+        {{-- <div class="row flex-center">
           <div class="col-auto text-center">
             <h2 class="fw-bold">Galeri</h2>
             <hr class="mx-auto text-dark" style="height:2px;width:50px" />
             <p>Tidak ada foto</p>
           </div>
-        </div>
+        </div> --}}
         
-        {{-- <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/article-bg.png')}});background-position:right center;background-size:auto;">
+        <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/article-bg.png')}});background-position:right center;background-size:auto;">
         </div>
         <!--/.bg-holder-->
 
@@ -556,65 +556,22 @@
 
           <div class="row h-100 justify-content-center pt-6">
 
+            @if(count($galeri) > 0)
+            @foreach($galeri as $g)
             <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/IMG_1500.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/IMG_1500.webp" alt="" width="100%" loading="lazy"/>
+              <a href="{{asset('galeri')}}/{{ $g->image }}" target="_BLANK">
+                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/{{ $g->image }}" alt="{{ $g->judul }}" width="100%" loading="lazy"/>
                 </div>
               </a>
             </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/IMG_1501.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/IMG_1501.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/IMG_1505.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/IMG_1505.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu budi rahayu 1.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu budi rahayu 1.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu budi rahayu.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu budi rahayu.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu budi rahayu2.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu budi rahayu2.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu ngudi rahayu 1.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu ngudi rahayu 1.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu ngudi rahayu.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu ngudi rahayu.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-9 col-md-4 ">
-              <a href="{{asset('galeri')}}/posyandu sukmo sejati.webp" target="_BLANK">
-                <div class="card rounded-3 shadow"><img class="card-img-top card-img-top-bottom" src="{{asset('galeri')}}/posyandu sukmo sejati.webp" alt="" width="100%" loading="lazy"/>
-                </div>
-              </a>
-            </div>
-            
+            @endforeach
+            @else
+            <h4 class="text-center">Tidak ada foto</h4>
+            @endif        
 
           </div>
 
-          <div class="row pt-6" data-masonry='{"percentPosition": true }'>
+          {{-- <div class="row pt-6" data-masonry='{"percentPosition": true }'>
             <div class="col-sm-6 col-lg-4 mb-4">
               <a target="_BLANK" href="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
                 <div class="card rounded-3 shadow">
@@ -622,10 +579,10 @@
                 </div>
               </a>
             </div>
-          </div>
-        </div> --}}
+          </div> --}}
+        </div>
       </section>
-      <section class="py-6 pt-7 bg-primary-gradient">
+      <section class="py-6 pt-4 bg-primary-gradient">
         <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/dot.png')}});background-position:left bottom;background-size:auto;filter:contrast(1.5);">
         </div>
         <!--/.bg-holder-->
@@ -634,7 +591,7 @@
         </div>
         <!--/.bg-holder-->
 
-        <div class="container">
+        {{-- <div class="container">
           <div class="row">
             <div class="col-12 col-lg-4 order-0 order-sm-0 pe-6"><a class="text-decoration-none" href="#"><img class="img-fluid me-2" src="{{asset('asset/img/icons/footer-logo.png')}}" alt="" /><span class="fw-bold fs-1 text-light">E-Posyandu</span></a>
               <p class="mt-3 text-white">Posyandu provides progressive, and affordable healthcare, accessible on mobile and online for everyone</p>
@@ -655,8 +612,9 @@
               </ul>
             </div>
           </div>
-        </div>
-        <div class="container pt-5">
+        </div> --}}
+        {{-- <div class="container pt-5"> --}}
+        <div class="container">
           <div class="row">
             <div class="col-12">
               <div class="text-center">

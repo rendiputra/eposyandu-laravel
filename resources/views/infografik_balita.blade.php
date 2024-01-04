@@ -121,7 +121,7 @@
     </section>
 
 
-    <section class="py-6 pt-7 bg-primary-gradient">
+    <section class="py-6 pt-6 bg-primary-gradient">
       <div class="bg-holder" style="background-image:url({{asset('asset/img/illustrations/dot.png')}});background-position:left bottom;background-size:auto;filter:contrast(1.5);">
       </div>
       <!--/.bg-holder-->
@@ -130,7 +130,7 @@
       </div>
       <!--/.bg-holder-->
 
-      <div class="container">
+      {{-- <div class="container">
         <div class="row">
           <div class="col-12 col-lg-4 order-0 order-sm-0 pe-6"><a class="text-decoration-none" href="#"><img class="img-fluid me-2" src="{{asset('asset/img/icons/footer-logo.png')}}" alt="" /><span class="fw-bold fs-1 text-light">E-Posyandu</span></a>
             <p class="mt-3 text-white">Posyandu provides progressive, and affordable healthcare, accessible on mobile and online for everyone</p>
@@ -149,8 +149,9 @@
             </ul>
           </div>
         </div>
-      </div>
-      <div class="container pt-5">
+      </div> --}}
+      {{-- <div class="container pt-5"> --}}
+      <div class="container">
         <div class="row">
           <div class="col-12">
             <div class="text-center">
