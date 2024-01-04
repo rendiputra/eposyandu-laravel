@@ -77,7 +77,7 @@
   @if ($role == 4)
           <li class="nav-header">Admin Panel</li>
           <li class="nav-item">
-            <a href="{{ route('admin.list_pemeriksaan_balita') }}" class="nav-link @if (Request::is('admin/pemeriksaan_balita','admin/pemeriksaan_balita/*')) active @endif">
+            <a href="{{ route('admin.list_pemeriksaan_balita') }}" class="nav-link @if (Request::is('admin/pemeriksaan_balita','admin/pemeriksaan_balita/*','kader/pemeriksaan_balita/*')) active @endif">
               <i class="nav-icon fa-solid fa-hospital-user"></i>
               <p>Pemeriksaan Balita</p>
             </a>
@@ -109,6 +109,14 @@
               <i class="nav-icon fa-solid fa-newspaper"></i>
               <p>
                 Artikel
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.list_galeri') }}" class="nav-link @if (Request::is('admin/galeri','admin/galeri/*')) active @endif ">
+              <i class="nav-icon fa-regular fa-images"></i>
+              <p>
+                Galeri
               </p>
             </a>
           </li>
@@ -181,7 +189,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2023 INSTITUT TEKNOLOGI TELKOM PURWORKERTO.</strong> All rights reserved.
+    <strong>Copyright &copy; 2024 INSTITUT TEKNOLOGI TELKOM PURWORKERTO.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
