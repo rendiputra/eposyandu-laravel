@@ -885,7 +885,7 @@ class AdminController extends Controller
     public function tambah_galeri_act(Request $req)
     {
         $req->validate([
-            'title'=> 'required|max:255',
+            'judul'=> 'required|max:255',
             'image'=> 'required|image|mimes:png,jpg,jpeg|max:2500',
         ]);
 
@@ -894,16 +894,16 @@ class AdminController extends Controller
         // dd($img);
         $img = Webp::make($req->file('image'));
         
-        $name = $req->title . time().'.webp';
+        $name = $req->judul . time().'.webp';
         $lokasi = public_path('galeri');
         
-        $slug = $req->title . '-' . time();
+        $slug = $req->judul . '-' . time();
         $slug = Str::kebab($slug);
         
         if($img->save($lokasi."/".$name)){
             DB::transaction(function () use ($req, $slug, $name){
                 $galeri = new Galeri();
-                $galeri->judul = $req->title;
+                $galeri->judul = $req->judul;
                 $galeri->image = $name;
                 $galeri->id_user = Auth::user()->id;
 
@@ -913,6 +913,81 @@ class AdminController extends Controller
             });
 
             return redirect()->route('admin.list_galeri')->with('error','Gagal mengupload galeri foto!');
+        }
+    }
+
+    /**
+     * Menampilkan halaman ubah galeri
+     * 
+     * @param id_galeri $id
+     * 
+     * @return view
+     */
+    public function update_galeri($id) 
+    {
+        $data = Galeri::where([
+            ['is_deleted', 0]
+        ])->findOrFail($id);
+
+        return view('admin.update-galeri', compact('data'));
+    }
+
+    /**
+     * Mengubah data galeri
+     * 
+     * @param Request $req
+     * @param id_galeri $id
+     * 
+     * @return redirect
+     */
+    public function update_galeri_act(Request $req, $id)
+    {
+        $req->validate([
+            'judul'=> 'required|max:255',
+            'image'=> 'image|mimes:png,jpg,jpeg|max:2500',
+        ]);
+
+        if($req->image){
+            $img = $req->image;
+            $img = Webp::make($img);
+            
+            $name = Str::kebab($req->judul) . time().'.webp';
+            $lokasi = public_path('galeri');
+            
+            $slug = $req->judul . '-' . time();
+            $slug = Str::kebab($slug);
+            
+            if($img->save($lokasi."/".$name)){
+                DB::transaction(function () use ($req, $id, $slug, $name){
+                    $galeri = Galeri::findOrFail($id);
+                    $galeri->judul = $req->judul;
+                    $galeri->image = $name;
+                    $galeri->id_user = Auth::user()->id;
+
+                    if($galeri->save()){
+                        return redirect()->route('admin.list_galeri')->with('sukses','Berhasil menulis galeri!');
+                    }
+                });
+
+                return redirect()->route('admin.list_galeri')->with('error','Gagal menyimpan galeri!');
+            }
+
+        }else{
+
+            $slug = $req->judul . '-' . time();
+            $slug = Str::kebab($slug);
+
+            DB::transaction(function () use ($req, $id, $slug){
+                $galeri = Galeri::findOrFail($id);
+                $galeri->judul = $req->judul;
+                $galeri->id_user = Auth::user()->id;
+
+                if($galeri->save()){
+                    return redirect()->route('admin.list_galeri')->with('sukses','Berhasil mengubah foto galeri!');
+                }
+            });
+
+            return redirect()->route('admin.list_galeri')->with('error','Gagal mengubah foto galeri!');
         }
     }
 }

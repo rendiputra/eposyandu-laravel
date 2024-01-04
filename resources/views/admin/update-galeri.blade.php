@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Upload Galeri Foto
+    Ubah Galeri Foto
 @endsection
 
 
@@ -12,12 +12,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Upload Galeri Foto</h1>
+        <h1>Ubah Galeri Foto</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ route('admin.list_galeri') }}">Galeri</a></li>
-          <li class="breadcrumb-item active">Upload Galeri Foto</li>
+          <li class="breadcrumb-item active">Ubah Galeri Foto</li>
         </ol>
       </div>
     </div>
@@ -30,7 +30,7 @@
           <h3 class="card-title">Galeri</h3>
         </div>
       
-        <form action="{{ route('admin.tambah_galeri_act') }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('admin.update_galeri_act', $data->id_galeri) }}" enctype="multipart/form-data" method="POST">
           <div class="card-body">
             @csrf
             <div class="form-group">
@@ -41,10 +41,10 @@
                 class="form-control @error('judul') is-invalid @enderror"
                 id="judul"
                 placeholder="Judul galeri ..."
-                value="{{ old('judul') }}"
+                value="{{ $data->judul }}"
                 required
               />
-              @error('judul') <label class="text-danger">{{ $message }}</label> @enderror
+              @error('title') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
               <label for="nama">Foto</label>
@@ -54,10 +54,9 @@
                 class="form-control @error('image') is-invalid @enderror"
                 id="image"
                 placeholder="Foto ..."
-                value="{{ old('image') }}"
-                required
+                value="{{ $data->image }}"
               />
-              <img id="blah" src="{{ url(asset('asset/blank-file-svgrepo-com.svg')) }}" alt="your image" height="50px" class="mt-2 ml-3"/>
+              <img id="blah" src="{{ url(asset('galeri')) }}/{{ $data->image }}" height="50px" class="mt-2 ml-3"/>
               @error('image') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
           </div>
