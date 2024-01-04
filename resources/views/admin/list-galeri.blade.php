@@ -55,12 +55,12 @@
                 @if (!empty($empty))
                   @foreach ($data as $d)
                   <tr>
-                    <td>{{ $d->title }}</td>
-                    <td class="text-center"><img src="{{ url(asset('image')) }}/{{ $d->image }}" alt="{{ $d->title }}" height="100px" >  </td>
+                    <td>{{ $d->judul }}</td>
+                    <td class="text-center"><img src="{{ url(asset('galeri')) }}/{{ $d->image }}" alt="{{ $d->judul }}" height="100px" >  </td>
                     <td>{{ $d->created_at }}</td>
                     <td class="text-center"> 
                       <a href="{{ route('admin.update_galeri', $d->id_galeri) }}" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> Ubah </a> 
-                      <a type="submit" class="mt-2 btn btn-danger" onclick="if (confirm('Apakah anda yakin menghapus galeri {{ $d->title }}?')) { 
+                      <a type="submit" class="mt-2 btn btn-danger" onclick="if (confirm('Apakah anda yakin menghapus galeri {{ $d->judul }}?')) { 
                         event.preventDefault();
                         document.getElementById('delete-data{{ $d->id_galeri }}').submit(); 
                       }"> <i class="fa-solid fa-trash-can"></i> Hapus </a> 

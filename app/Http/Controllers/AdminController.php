@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use App\Models\Balita;
+use App\Models\Galeri;
 use App\Models\IbuHamil;
 use App\Models\Posyandu;
 use App\Models\User;
@@ -864,5 +865,54 @@ class AdminController extends Controller
         $empty = count($data);
 
         return view('admin.list-galeri', compact('data', 'empty'));
+    }
+
+    /**
+     * @return view
+     */
+    public function tambah_galeri() 
+    {                
+        return view('admin.tambah-galeri');
+    }
+
+    /**
+     * Menyimpan galeri foto
+     * 
+     * @param Request $req
+     * 
+     * @return redirect
+     */
+    public function tambah_galeri_act(Request $req)
+    {
+        $req->validate([
+            'title'=> 'required|max:255',
+            'image'=> 'required|image|mimes:png,jpg,jpeg|max:2500',
+        ]);
+
+        // $img = $req->image;
+        $img = $req->file('image');
+        // dd($img);
+        $img = Webp::make($req->file('image'));
+        
+        $name = $req->title . time().'.webp';
+        $lokasi = public_path('galeri');
+        
+        $slug = $req->title . '-' . time();
+        $slug = Str::kebab($slug);
+        
+        if($img->save($lokasi."/".$name)){
+            DB::transaction(function () use ($req, $slug, $name){
+                $galeri = new Galeri();
+                $galeri->judul = $req->title;
+                $galeri->image = $name;
+                $galeri->id_user = Auth::user()->id;
+
+                if($galeri->save()){
+                    return redirect()->route('admin.list_galeri')->with('sukses','Berhasil mengupload galeri foto!');
+                }
+            });
+
+            return redirect()->route('admin.list_galeri')->with('error','Gagal mengupload galeri foto!');
+        }
     }
 }
