@@ -223,7 +223,7 @@ class AdminController extends Controller
     public function list_balita() 
     {
         $data = DB::table('balita')
-            ->select('id_balita', 'nik', 'nama', 'no_kk', 'nama_orangtua', 'jenis_kelamin', 'tanggal_lahir')
+            ->select('id_balita', 'nik', 'nama', 'no_kk', 'nama_ibu', 'jenis_kelamin', 'tanggal_lahir')
             ->where('is_deleted', 0)
             ->get();
         
@@ -259,8 +259,10 @@ class AdminController extends Controller
             'nama'=> 'required',
             'nik'=> 'required|digits:16|numeric|unique:App\Models\Balita,nik',
             'no_kk'=> 'required|digits:16|numeric',
-            'nik_orangtua'=> 'required|digits:16|numeric',
-            'nama_orangtua'=> 'required',
+            'nik_ibu'=> 'required|digits:16|numeric',
+            'nama_ibu'=> 'required',
+            'nik_ayah'=> 'required|digits:16|numeric',
+            'nama_ayah'=> 'required',
             'jenis_kelamin'=> ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'posyandu'=> 'required|exists:App\Models\Posyandu,id_posyandu',
             'tanggal_lahir'=> 'required|date',
@@ -278,10 +280,14 @@ class AdminController extends Controller
             'no_kk.required'=> 'Kolom "No Kartu Keluarga" wajib diisi.',
             'no_kk.digits'=> 'Jumlah digit "No Kartu Keluarga" tidak valid.',
             'no_kk.numeric'=> 'Kolom "No Kartu Keluarga" tidak bisa diisikan selain angka.',
-            'nik_orangtua.required'=> 'Kolom "NIK orang tua" wajib diisi.',
-            'nik_orangtua.digits'=> 'Jumlah digit "NIK orang tua" tidak valid.',
-            'nik_orangtua.numeric'=> 'Kolom "NIK orang tua" tidak bisa diisikan selain angka.',
-            'nama_orangtua.required'=> 'Kolom "nama orang tua" wajib diisi.',
+            'nik_ibu.required'=> 'Kolom "NIK Ibu" wajib diisi.',
+            'nik_ibu.digits'=> 'Jumlah digit "NIK Ibu" tidak valid.',
+            'nik_ibu.numeric'=> 'Kolom "NIK Ibu" tidak bisa diisikan selain angka.',
+            'nama_ibu.required'=> 'Kolom "nama Ibu" wajib diisi.',
+            'nik_ayah.required'=> 'Kolom "NIK Ayah" wajib diisi.',
+            'nik_ayah.digits'=> 'Jumlah digit "NIK Ayah" tidak valid.',
+            'nik_ayah.numeric'=> 'Kolom "NIK Ayah" tidak bisa diisikan selain angka.',
+            'nama_ayah.required'=> 'Kolom "nama Ayah" wajib diisi.',
             'jenis_kelamin.required'=> 'Kolom "jenis kelamin" wajib diisi.',
             'jenis_kelamin.in'=> $req->jenis_posyandu . ' tidak valid.',
             'tanggal_lahir.required'=> 'Kolom "Tanggal lahir" wajib diisi.',
@@ -297,8 +303,10 @@ class AdminController extends Controller
             $balita->nama = $req->nama;
             $balita->nik = $req->nik;
             $balita->no_kk = $req->no_kk;
-            $balita->nik_orangtua = $req->nik_orangtua;
-            $balita->nama_orangtua = $req->nama_orangtua;
+            $balita->nik_ibu = $req->nik_ibu;
+            $balita->nama_ibu = $req->nama_ibu;
+            $balita->nik_ayah = $req->nik_ayah;
+            $balita->nama_ayah = $req->nama_ayah;
             $balita->tanggal_lahir = $req->tanggal_lahir;
             $balita->jenis_kelamin = $req->jenis_kelamin;
             $balita->berat_badan_lahir = $req->berat_badan_lahir;
@@ -340,8 +348,10 @@ class AdminController extends Controller
             'nama'=> 'required',
             'nik'=> 'required|digits:16|numeric',
             'no_kk'=> 'required|digits:16|numeric',
-            'nik_orangtua'=> 'required|digits:16|numeric',
-            'nama_orangtua'=> 'required',
+            'nik_ibu'=> 'required|digits:16|numeric',
+            'nama_ibu'=> 'required',
+            'nik_ayah'=> 'required|digits:16|numeric',
+            'nama_ayah'=> 'required',
             'jenis_kelamin'=> ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'posyandu'=> 'required|exists:App\Models\Posyandu,id_posyandu',
             'tanggal_lahir'=> 'required|date',
@@ -357,10 +367,14 @@ class AdminController extends Controller
             'no_kk.required'=> 'Kolom "No Kartu Keluarga" wajib diisi.',
             'no_kk.digits'=> 'Jumlah digit "No Kartu Keluarga" tidak valid.',
             'no_kk.numeric'=> 'Kolom "No Kartu Keluarga" tidak bisa diisikan selain angka.',
-            'nik_orangtua.required'=> 'Kolom "NIK orang tua" wajib diisi.',
-            'nik_orangtua.digits'=> 'Jumlah digit "NIK orang tua" tidak valid.',
-            'nik_orangtua.numeric'=> 'Kolom "NIK orang tua" tidak bisa diisikan selain angka.',
-            'nama_orangtua.required'=> 'Kolom "nama orang tua" wajib diisi.',
+            'nik_ibu.required'=> 'Kolom "NIK Ibu" wajib diisi.',
+            'nik_ibu.digits'=> 'Jumlah digit "NIK Ibu" tidak valid.',
+            'nik_ibu.numeric'=> 'Kolom "NIK Ibu" tidak bisa diisikan selain angka.',
+            'nama_ibu.required'=> 'Kolom "nama Ibu" wajib diisi.',
+            'nik_ayah.required'=> 'Kolom "NIK Ayah" wajib diisi.',
+            'nik_ayah.digits'=> 'Jumlah digit "NIK Ayah" tidak valid.',
+            'nik_ayah.numeric'=> 'Kolom "NIK Ayah" tidak bisa diisikan selain angka.',
+            'nama_ayah.required'=> 'Kolom "nama Ayah" wajib diisi.',
             'jenis_kelamin.required'=> 'Kolom "jenis kelamin" wajib diisi.',
             'jenis_kelamin.in'=> $req->jenis_posyandu . ' tidak valid.',
             'posyandu.exists'=> 'Posyandu tidak ada didalam database.',
@@ -377,8 +391,10 @@ class AdminController extends Controller
             $balita->nama = $req->nama;
             $balita->nik = $req->nik;
             $balita->no_kk = $req->no_kk;
-            $balita->nik_orangtua = $req->nik_orangtua;
-            $balita->nama_orangtua = $req->nama_orangtua;
+            $balita->nik_ibu = $req->nik_ibu;
+            $balita->nama_ibu = $req->nama_ibu;
+            $balita->nik_ayah = $req->nik_ayah;
+            $balita->nama_ayah = $req->nama_ayah;
             $balita->tanggal_lahir = $req->tanggal_lahir;
             $balita->jenis_kelamin = $req->jenis_kelamin;
             $balita->berat_badan_lahir = $req->berat_badan_lahir;
@@ -778,7 +794,7 @@ class AdminController extends Controller
     {
         $balita = DB::table('balita')
             ->join('posyandu','balita.id_posyandu','posyandu.id_posyandu')
-            ->select('balita.id_balita', 'balita.nama', 'balita.nama_orangtua', 'posyandu.nama as nama_posyandu')
+            ->select('balita.id_balita', 'balita.nama', 'balita.nama_ibu', 'posyandu.nama as nama_posyandu')
             ->where([
                 ['balita.is_deleted', 0],
             ])->orderByDesc('balita.id_balita')

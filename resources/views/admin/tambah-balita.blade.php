@@ -79,33 +79,62 @@
               @error('no_kk') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
-              <label for="nik_orangtua">NIK Orang Tua</label>
+              <label for="nik_ibu">NIK Ibu</label>
               <input
-                name="nik_orangtua"
-                class="form-control @error('nik_orangtua') is-invalid @enderror"
-                id="nik_orangtua"
-                placeholder="NIK Orang Tua ..."
-                value="{{ old('nik_orangtua') }}"
+                name="nik_ibu"
+                class="form-control @error('nik_ibu') is-invalid @enderror"
+                id="nik_ibu"
+                placeholder="NIK Ibu ..."
+                value="{{ old('nik_ibu') }}"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 type = "number"
                 maxlength = "16"
                 min="0"
                 required
               />
-              @error('nik_orangtua') <label class="text-danger">{{ $message }}</label> @enderror
+              @error('nik_ibu') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
-              <label for="nama_orangtua">Nama Orang Tua</label>
+              <label for="nama_ibu">Nama Ibu</label>
               <input
                 type="text"
-                name="nama_orangtua"
-                class="form-control @error('nama_orangtua') is-invalid @enderror"
-                id="nama_orangtua"
-                placeholder="Nama Orang Tua ..."
-                value="{{ old('nama_orangtua') }}"
+                name="nama_ibu"
+                class="form-control @error('nama_ibu') is-invalid @enderror"
+                id="nama_ibu"
+                placeholder="Nama Ibu ..."
+                value="{{ old('nama_ibu') }}"
                 required
               />
-              @error('nama_orangtua') <label class="text-danger">{{ $message }}</label> @enderror
+              @error('nama_ibu') <label class="text-danger">{{ $message }}</label> @enderror
+            </div>
+            <div class="form-group">
+              <label for="nik_ayah">NIK Ayah</label>
+              <input
+                name="nik_ayah"
+                class="form-control @error('nik_ayah') is-invalid @enderror"
+                id="nik_ayah"
+                placeholder="NIK Ayah ..."
+                value="{{ old('nik_ayah') }}"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type = "number"
+                maxlength = "16"
+                min="0"
+                required
+              />
+              @error('nik_ayah') <label class="text-danger">{{ $message }}</label> @enderror
+            </div>
+            <div class="form-group">
+              <label for="nama_ayah">Nama Ayah</label>
+              <input
+                type="text"
+                name="nama_ayah"
+                class="form-control @error('nama_ayah') is-invalid @enderror"
+                id="nama_ayah"
+                placeholder="Nama Ayah ..."
+                value="{{ old('nama_ayah') }}"
+                required
+              />
+              @error('nama_ayah') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
               <label for="exampleSelectRounded0">Posyandu</label>
