@@ -1087,13 +1087,12 @@ class AdminController extends Controller
       {
           $req->validate([
               'nama'=> 'required|max:255',
-  
           ],
           [
               'nama.required'=> 'Kolom nama wajib diisi.',
               'nama.max'=> 'Jumlah karakter melebihi 255 karakter.',
           ]);
-  
+
           DB::transaction(function () use ($req, $id){
               $vaksin = Vaksin::findOrFail($id);
               $vaksin->nama = $req->nama;
@@ -1102,4 +1101,21 @@ class AdminController extends Controller
   
           return redirect()->route('admin.list_vaksin')->with('sukses', 'Berhasil mengubah data vaksin.');
       }
+
+      /**
+      * Menghapus data vaksin
+      * 
+      * @param id_vaksin $id
+      * @return redirect()
+      */
+    public function delete_vaksin($id) 
+    {
+        DB::transaction(function () use ($id){
+            $vaksin = vaksin::findOrFail($id);
+            $vaksin->is_deleted = 1;
+            $vaksin->update();
+        });
+
+        return redirect()->route('admin.list_vaksin')->with('sukses', 'Berhasil menghapus data vaksin.');
+    }
 }
