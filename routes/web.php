@@ -126,4 +126,12 @@ Route::prefix('admin')->controller(AdminController::class)->middleware(['isAdmin
     Route::get('/galeri/update/{id}', 'update_galeri')->name('update_galeri');
     Route::post('/galeri/update/{id}', 'update_galeri_act')->name('update_galeri_act');
     Route::post('/galeri/delete/{id}', 'delete_galeri')->name('delete_galeri');
+
+    // vaksin
+    Route::get('/vaksin', 'list_vaksin')->name('list_vaksin');
+    Route::get('/vaksin/tambah', 'tambah_vaksin')->name('tambah_vaksin');
+    Route::post('/vaksin/tambah', 'tambah_vaksin_act')->name('tambah_vaksin_act');
+    Route::get('/vaksin/update/{id}', 'update_vaksin')->name('update_vaksin');
+    Route::post('/vaksin/update/{id}', 'update_vaksin_act')->name('update_vaksin_act');
+    Route::post('/vaksin/delete/{id}', 'delete_vaksin')->name('delete_vaksin');
 });

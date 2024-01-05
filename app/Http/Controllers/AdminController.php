@@ -7,6 +7,7 @@ use App\Models\Balita;
 use App\Models\Galeri;
 use App\Models\IbuHamil;
 use App\Models\Posyandu;
+use App\Models\Vaksin;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -1007,5 +1008,21 @@ class AdminController extends Controller
         });
 
         return redirect()->route('admin.list_galeri')->with('sukses', 'Berhasil menghapus foto galeri.');
+    }
+
+    /**
+     * Menampilkan daftar data vaksin
+     * 
+     * @return void
+     */
+    public function list_vaksin() 
+    {
+        $data = DB::table('vaksins')
+            ->where('is_deleted', 0)
+            ->get();
+        
+        $empty = count($data);
+
+        return view('admin.list-vaksin', compact(['data', 'empty']));
     }
 }
