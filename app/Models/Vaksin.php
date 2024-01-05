@@ -14,5 +14,6 @@ class Vaksin extends Model
     protected $fillable = [
         'id_vaksin',
         'nama',
+        'is_deleted',
     ];
 }

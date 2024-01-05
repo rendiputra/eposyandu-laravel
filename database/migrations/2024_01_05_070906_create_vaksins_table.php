@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('vaksins', function (Blueprint $table) {
             $table->id('id_vaksin');
             $table->string('nama');
+            $table->tinyInteger('is_deleted')->default(0);
             $table->timestamps();
         });
     }
