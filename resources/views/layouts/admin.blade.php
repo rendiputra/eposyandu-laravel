@@ -120,6 +120,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.list_vaksin') }}" class="nav-link @if (Request::is('admin/vaksin','admin/vaksin/*')) active @endif ">
+              <i class="nav-icon fa-solid fa-syringe"></i>
+              <p>
+                Vaksin
+              </p>
+            </a>
+          </li>
   @endif
   @if ($role == 2 || $role == 4)
         @if($role == 2)

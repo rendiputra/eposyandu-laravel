@@ -3,6 +3,11 @@
 @section('title')
     Tambah Data Pemeriksaan Balita
 @endsection
+@section('css')
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
 
 @section('content')
 
@@ -53,6 +58,23 @@
                 required
               />
               @error('tanggal_periksa') <label class="text-danger">{{ $message }}</label> @enderror
+            </div>
+            <div class="form-group">
+              <label for="vaksin">Vaksin</label>
+              <select 
+              class="form-control select2" 
+              style="height: 120%; width: 100%" 
+              name="vaksin">
+              <option value="Tidak ada" selected>
+                Tidak ada
+              </option>
+                @foreach ($vaksin as $v)
+                  <option value="{{ $v->nama }}">
+                    {{ $v->nama }}
+                  </option>
+                @endforeach
+              </select>
+              @error('vaksin') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
               <label for="berat_badan">Berat badan</label>
@@ -108,7 +130,7 @@
                 name="lingkar_kepala"
                 class="form-control @error('lingkar_kepala') is-invalid @enderror"
                 id="lingkar_kepala"
-                placeholder="Lingkar lengan atas ..."
+                placeholder="Lingkar kepala ..."
                 value="{{ old('lingkar_kepala') }}"
                 min="0"
                 step="0.01"
@@ -124,4 +146,16 @@
       </div>
     </div>
 </section>
+@endsection
+
+@section('js')
+  <!-- Select2 -->
+  <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+  <script>
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    })
+  </script>
 @endsection

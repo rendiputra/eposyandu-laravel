@@ -205,7 +205,11 @@ class KaderController extends Controller
         $data = Balita::select('id_balita', 'nama', 'nik')
             ->findOrFail($id_balita);
 
-        return view('kader.balita.create', compact('data'));
+        $vaksin = DB::table('vaksin')
+            ->where('is_deleted', 0)
+            ->get();
+
+        return view('kader.balita.create', compact('data', 'vaksin'));
     }
 
     /**
@@ -224,6 +228,7 @@ class KaderController extends Controller
             'lingkar_lengan_atas'=> 'required|numeric',
             'lingkar_kepala'=> 'required|numeric',
             'tanggal_periksa'=> 'required',
+            'vaksin'=> 'required',
 
         ],
         [
@@ -256,6 +261,7 @@ class KaderController extends Controller
         DB::transaction(function () use ($req, $user, $data_status_stunting, $data_status_berat_badan){
             $balita = new PemeriksaanBalita();
             $balita->id_balita = $req->id_balita;
+            $balita->vaksin = $req->vaksin;
             $balita->berat_badan = $req->berat_badan;
             $balita->tinggi_badan = $req->tinggi_badan;
             $balita->lingkar_lengan_atas = $req->lingkar_lengan_atas;
@@ -268,7 +274,11 @@ class KaderController extends Controller
             $balita->save();
         });
 
-        return redirect()->route('kader.list_pemeriksaan_balita')->with('sukses', 'Berhasil menambahkan data pemeriksaan balita.');
+        if(Auth::user()->role == "4"){
+            return redirect()->route('admin.list_pemeriksaan_balita')->with('sukses', 'Berhasil menambahkan data pemeriksaan balita.');
+        } else {
+            return redirect()->route('kader.list_pemeriksaan_balita')->with('sukses', 'Berhasil menambahkan data pemeriksaan balita.');
+        }
     }
 
     /**
@@ -284,8 +294,11 @@ class KaderController extends Controller
 
         $balita = Balita::findOrFail($data->id_balita);
 
+        $vaksin = DB::table('vaksin')
+            ->where('is_deleted', 0)
+            ->get();
 
-        return view('kader.balita.update', compact('data', 'balita'));
+        return view('kader.balita.update', compact('data', 'balita', 'vaksin'));
     }
 
     /**
@@ -304,6 +317,7 @@ class KaderController extends Controller
             'lingkar_lengan_atas'=> 'required|numeric',
             'lingkar_kepala'=> 'required|numeric',
             'tanggal_periksa'=> 'required',
+            'vaksin'=> 'required',
 
         ],
         [
@@ -338,6 +352,7 @@ class KaderController extends Controller
 
         DB::transaction(function () use ($req, $id, $data_status_stunting, $data_status_berat_badan){
             $balita = PemeriksaanBalita::findOrFail($id);
+            $balita->vaksin = $req->vaksin;
             $balita->berat_badan = $req->berat_badan;
             $balita->tinggi_badan = $req->tinggi_badan;
             $balita->lingkar_lengan_atas = $req->lingkar_lengan_atas;
@@ -348,8 +363,12 @@ class KaderController extends Controller
             $balita->id_user_petugas = Auth::user()->id;
             $balita->update();
         });
-
-        return redirect()->route('kader.list_pemeriksaan_balita')->with('sukses', 'Berhasil mengubah data pemeriksaan balita.');
+        
+        if(Auth::user()->role == "4"){
+            return redirect()->route('admin.list_pemeriksaan_balita')->with('sukses', 'Berhasil mengubah data pemeriksaan balita.');
+        } else {
+            return redirect()->route('kader.list_pemeriksaan_balita')->with('sukses', 'Berhasil mengubah data pemeriksaan balita.');
+        }
     }
 
     /**

@@ -64,6 +64,7 @@
                   <th>Panjang Badan</th>
                   <th>Lingkar lengan</th>
                   <th>Lingkar kepala</th>
+                  <th>Vaksin</th>
                   <th>Status Stunting</th>
                   <th>Status Berat Badan</th>
                   <th>Aksi</th>
@@ -84,6 +85,7 @@
                     <td>{{ $d->tinggi_badan }} cm</td>
                     <td>{{ $d->lingkar_lengan_atas }} cm</td>
                     <td>{{ $d->lingkar_kepala }} cm</td>
+                    <td>{{ $d->vaksin }}</td>
                     <td>
                       @if($d->status_stunting == "severely stunted")
                         <span class="float-right badge bg-danger">{{ $d->status_stunting }}</span>

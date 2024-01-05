@@ -4,6 +4,12 @@
     Update Data Pemeriksaan Balita
 @endsection
 
+@section('css')
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
+
 @section('content')
 
 <!-- Content Header (Page header) -->
@@ -58,6 +64,26 @@
                 required
               />
               @error('tanggal_periksa') <label class="text-danger">{{ $message }}</label> @enderror
+            </div>
+            <div class="form-group">
+              <label for="vaksin">Vaksin</label>
+              <select 
+              class="form-control select2" 
+              style="height: 120%; width: 100%" 
+              name="vaksin">
+              <option value="Tidak ada">
+                Tidak ada
+              </option>
+              <option value="{{ $data->vaksin }}" selected>
+                {{ $data->vaksin }}
+              </option>
+                @foreach ($vaksin as $v)
+                  <option value="{{ $v->nama }}">
+                    {{ $v->nama }}
+                  </option>
+                @endforeach
+              </select>
+              @error('vaksin') <label class="text-danger">{{ $message }}</label> @enderror
             </div>
             <div class="form-group">
               <label for="berat_badan">Berat badan</label>
@@ -142,4 +168,16 @@
       </div>
     </div>
 </section>
+@endsection
+
+@section('js')
+  <!-- Select2 -->
+  <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+  <script>
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    })
+  </script>
 @endsection
