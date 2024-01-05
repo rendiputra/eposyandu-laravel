@@ -14,6 +14,8 @@
   <!-- Theme style -->
   {{-- <link prerender rel="stylesheet" href="{{ asset('dist-adminlte/css/adminlte.min.css')}}"> --}}
   <link prerender rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+  <link rel="icon" type="img/ico" href="{{ asset('asset/img/LogoEposyandu2.ico') }}">
+  <link rel="shortcut icon" href="{{ asset('asset/img/LogoEposyandu2.ico') }}">
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -43,7 +45,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="{{ asset('dist-adminlte/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('asset/img/LogoEposyandu3.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">E-Posyandu</span>
     </a>
 

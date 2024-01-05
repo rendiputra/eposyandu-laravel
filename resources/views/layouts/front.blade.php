@@ -29,7 +29,8 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="{{asset('asset/css/theme.css')}}" rel="stylesheet" />
-    
+    <link rel="icon" type="img/ico" href="{{ asset('asset/img/LogoEposyandu2.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('asset/img/LogoEposyandu2.ico') }}">
     @yield('css')
 
   </head>
