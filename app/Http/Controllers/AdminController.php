@@ -1062,4 +1062,44 @@ class AdminController extends Controller
 
         return redirect()->route('admin.list_vaksin')->with('sukses', 'Berhasil menambahkan data vaksin.');
     }
+
+    /**
+      * Menampilkan view admin/update-vaksin
+      * 
+      * @param id_vaksin $id
+      * @return view admin/update-vaksin
+      */
+      public function update_vaksin($id) 
+      {
+          $data = Vaksin::findOrFail($id);
+  
+          return view('admin.update-vaksin', compact('data'));
+      }
+  
+      /**
+        * Update data vaksin ke database
+        * 
+        * @param Request $req
+        * @param id_vaksin $id
+        * @return redirect to admin.list_vaksin
+        */
+      public function update_vaksin_act(Request $req, $id) 
+      {
+          $req->validate([
+              'nama'=> 'required|max:255',
+  
+          ],
+          [
+              'nama.required'=> 'Kolom nama wajib diisi.',
+              'nama.max'=> 'Jumlah karakter melebihi 255 karakter.',
+          ]);
+  
+          DB::transaction(function () use ($req, $id){
+              $vaksin = Vaksin::findOrFail($id);
+              $vaksin->nama = $req->nama;
+              $vaksin->update();
+          });
+  
+          return redirect()->route('admin.list_vaksin')->with('sukses', 'Berhasil mengubah data vaksin.');
+      }
 }
