@@ -22,7 +22,7 @@ class CreatePemeriksaanBalitaTable extends Migration
             $table->float('tinggi_badan')->length(20);
             $table->float('lingkar_lengan_atas')->length(20);
             $table->float('lingkar_kepala')->length(20);
-            $table->float('vaksin')->length(20)->nullable();
+            $table->string('vaksin')->nullable();
             $table->string('status_stunting')->length(20);
             $table->string('status_berat_badan')->length(20);
             $table->tinyInteger('is_deleted')->default(0);
