@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vaksins', function (Blueprint $table) {
+        Schema::create('vaksin', function (Blueprint $table) {
             $table->id('id_vaksin');
             $table->string('nama');
             $table->tinyInteger('is_deleted')->default(0);

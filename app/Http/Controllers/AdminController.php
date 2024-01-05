@@ -130,22 +130,22 @@ class AdminController extends Controller
 
         $req->validate([
             'nama'=> 'required|max:255',
-            'jenis_posyandu'=> [Rule::in(['balita', 'lansia']), 'required'],
+            // 'jenis_posyandu'=> [Rule::in(['balita', 'lansia']), 'required'],
             'alamat'=> 'required',
 
         ],
         [
             'nama.required'=> 'Kolom nama wajib diisi.',
             'nama.max'=> 'Jumlah karakter melebihi 255 karakter.',
-            'jenis_posyandu.required'=> 'Kolom jenis posyandu wajib diisi.',
-            'jenis_posyandu.in'=> $req->jenis_posyandu . ' tidak valid.',
+            // 'jenis_posyandu.required'=> 'Kolom jenis posyandu wajib diisi.',
+            // 'jenis_posyandu.in'=> $req->jenis_posyandu . ' tidak valid.',
             'alamat.required'=> 'Kolom alamat wajib diisi.',
         ]);
 
         DB::transaction(function () use ($req){
             $posyandu = new Posyandu();
             $posyandu->nama = $req->nama;
-            $posyandu->jenis_posyandu = $req->jenis_posyandu;
+            $posyandu->jenis_posyandu = "balita";
             $posyandu->alamat = $req->alamat;
             $posyandu->save();
         });
@@ -177,22 +177,22 @@ class AdminController extends Controller
     {
         $req->validate([
             'nama'=> 'required|max:255',
-            'jenis_posyandu'=> [Rule::in(['balita', 'lansia']), 'required'],
+            // 'jenis_posyandu'=> [Rule::in(['balita', 'lansia']), 'required'],
             'alamat'=> 'required',
 
         ],
         [
             'nama.required'=> 'Kolom nama wajib diisi.',
             'nama.max'=> 'Jumlah karakter melebihi 255 karakter.',
-            'jenis_posyandu.required'=> 'Kolom jenis posyandu wajib diisi.',
-            'jenis_posyandu.in'=> $req->jenis_posyandu . ' tidak valid.',
+            // 'jenis_posyandu.required'=> 'Kolom jenis posyandu wajib diisi.',
+            // 'jenis_posyandu.in'=> $req->jenis_posyandu . ' tidak valid.',
             'alamat.required'=> 'Kolom alamat wajib diisi.',
         ]);
 
         DB::transaction(function () use ($req, $id){
             $posyandu = Posyandu::findOrFail($id);
             $posyandu->nama = $req->nama;
-            $posyandu->jenis_posyandu = $req->jenis_posyandu;
+            $posyandu->jenis_posyandu = "balita";
             $posyandu->alamat = $req->alamat;
             $posyandu->update();
         });
@@ -1017,12 +1017,49 @@ class AdminController extends Controller
      */
     public function list_vaksin() 
     {
-        $data = DB::table('vaksins')
+        $data = DB::table('vaksin')
             ->where('is_deleted', 0)
             ->get();
         
         $empty = count($data);
 
         return view('admin.list-vaksin', compact(['data', 'empty']));
+    }
+
+    /**
+      * Menampilkan view admin/tambah-vaksin
+      * 
+      * @return view admin/tambah-vaksin
+      */
+      public function tambah_vaksin() 
+      {
+          return view('admin.tambah-vaksin');
+      }
+
+    /**
+      * Menyimpan data vaksin ke database
+      * 
+      * @param Request $req
+      * @return redirect()
+      */
+    public function tambah_vaksin_act(Request $req) 
+    {
+
+        $req->validate([
+            'nama'=> 'required|max:255',
+
+        ],
+        [
+            'nama.required'=> 'Kolom nama wajib diisi.',
+            'nama.max'=> 'Jumlah karakter melebihi 255 karakter.',
+        ]);
+
+        DB::transaction(function () use ($req){
+            $vaksin = new Vaksin();
+            $vaksin->nama = $req->nama;
+            $vaksin->save();
+        });
+
+        return redirect()->route('admin.list_vaksin')->with('sukses', 'Berhasil menambahkan data vaksin.');
     }
 }
