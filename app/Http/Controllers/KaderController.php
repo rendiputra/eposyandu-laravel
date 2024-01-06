@@ -79,7 +79,8 @@ class KaderController extends Controller
                     ['is_deleted', 0],
                     ['created_at', '>', Carbon::now()->subYear()],
                     ['id_posyandu', $user->id_posyandu],
-                ])->get();
+                ])->orderBy('created_at', 'asc')
+                ->get();
 
         $dataJumlahBalitaLaki = DB::table('balita')
                 ->select(DB::raw('count(id_balita) as jumlah'))

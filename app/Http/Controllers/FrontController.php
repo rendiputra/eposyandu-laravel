@@ -159,7 +159,8 @@ class FrontController extends Controller
                 ->where([
                     ['is_deleted', 0],
                     ['created_at', '>', Carbon::now()->subYear()]
-                ])->get();
+                ])->orderBy('created_at', 'asc')
+                ->get();
 
         $dataPemeriksaanBalitaPerempuanSangatStunting = DB::table('pemeriksaan_balita')
                 ->rightJoin('balita','pemeriksaan_balita.id_balita','balita.id_balita')
