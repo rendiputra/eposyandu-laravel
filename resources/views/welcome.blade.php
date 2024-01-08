@@ -606,8 +606,8 @@
               <h6 class="lh-lg fw-bold text-light">Alamat</h6>
               <ul class="list-unstyled mb-md-4 mb-lg-0">
                 <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, blanditiis!.</span></li>
-                {{-- <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
-                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li> --}}
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 2: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
+                <li class="lh-lg"><span class="text-light fs--1 text-decoration-none">Posyandu 3: Jl. Lorem ipsum dolor sit amet consectetur.</span></li>
               </ul>
             </div>
           </div>
