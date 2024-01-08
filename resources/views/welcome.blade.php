@@ -32,7 +32,7 @@
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
               <li class="nav-item"><a class="nav-link fw-bold active" aria-current="page" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#tentang">Tentang E-Posyandu</a></li>
+              <li class="nav-item"><a class="nav-link" href="#tentang">Tentang Posyandu</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ route('infografik_balita') }}">Info Grafik</a></li>
               <li class="nav-item"><a class="nav-link" href="#tka">Tumbuh Kembang Anak</a></li>
               <li class="nav-item"><a class="nav-link" href="#artikel">Artikel</a></li>
