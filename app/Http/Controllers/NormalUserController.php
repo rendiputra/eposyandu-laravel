@@ -31,12 +31,36 @@ class NormalUserController extends Controller
     {
         $user = Auth::user();
 
+        $dataPemeriksaanBalita = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->select('pemeriksaan_balita.id_pemeriksaan_balita', 'pemeriksaan_balita.created_at', DB::raw('YEAR(pemeriksaan_balita.created_at) as tahun, month(pemeriksaan_balita.created_at) as bulan, count(pemeriksaan_balita.created_at) as jumlah'))
+            ->groupBy(DB::raw('month(pemeriksaan_balita.created_at)'))
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['balita.nik_ibu', $user->nik],
+                ['pemeriksaan_balita.created_at', '>', Carbon::now()->subYear()]
+            ])->orderBy('pemeriksaan_balita.created_at', 'asc')
+            ->get();
+
+        $totalPemeriksaanBalita = DB::table('pemeriksaan_balita')
+            ->join('balita','pemeriksaan_balita.id_balita','balita.id_balita')
+            ->select(DB::raw(' count(pemeriksaan_balita.id_pemeriksaan_balita) as jumlah'))
+            ->where([
+                ['pemeriksaan_balita.is_deleted', 0],
+                ['balita.is_deleted', 0],
+                ['balita.nik_ibu', $user->nik],
+            ])->get();
+
+        // dd($user->nik);
+        // dd($totalPemeriksaanBalita);
+
         $dataJumlahBalita = DB::table('balita')
                 ->select(DB::raw('count(id_balita) as jumlah'))
                 ->where([
                     ['is_deleted', 0],
                     ['created_at', '>', Carbon::now()->subYear()],
-                    ['nik', $user->nik],
+                    ['nik_ibu', $user->nik],
                 ])->get();
 
         $dataBalita = DB::table('pemeriksaan_balita')
@@ -51,6 +75,8 @@ class NormalUserController extends Controller
         return view('normal_user.dashboard', compact(
             'dataJumlahBalita', 
             'dataBalita',
+            'dataPemeriksaanBalita',
+            'totalPemeriksaanBalita',
         ));
     }
 
@@ -96,7 +122,7 @@ class NormalUserController extends Controller
                 ['pemeriksaan_balita.is_deleted', 0],
                 ['pemeriksaan_balita.id_balita', $id],
                 ['balita.is_deleted', 0],
-                ['balita.nik', $user->nik],
+                ['balita.nik_ibu', $user->nik],
             ])->orderByDesc('id_pemeriksaan_balita')
             ->get();
         // dd($data);
@@ -208,6 +234,7 @@ class NormalUserController extends Controller
                 ['pemeriksaan_balita.is_deleted', 0],
                 ['balita.is_deleted', 0],
                 ['pemeriksaan_balita.id_pemeriksaan_balita', $id],
+                ['balita.nik_ibu', $user->nik],
             ])->first();
         
         if(!$data)

@@ -23,8 +23,20 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
+
+      <div class="col-lg-6 col-12">
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{ $totalPemeriksaanBalita[0]->jumlah }}</h3>
+            <p>Total Pemeriksaan Balita</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-home"></i>
+          </div>
+        </div>
+      </div>
     
-      <div class="col-lg-12 col-12">
+      <div class="col-lg-6 col-12">
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{ $dataJumlahBalita[0]->jumlah }}</h3>
@@ -73,7 +85,7 @@
       
             <div class="position-relative mb-4">
               @if (($dataJumlahBalita[0]->jumlah > 0))
-              <canvas id="pieChart" height="100px" width="100px"></canvas>
+              <canvas id="pemeriksaanBalitaChart" height="50px" width="100px"></canvas>
               @else
                 <div class="justify-content-center d-flex ">
                   <img src="{{ asset('asset/undraw_to_the_mooni.svg') }}" alt="" srcset="" width="30%">
@@ -85,53 +97,6 @@
         </div>
       </div>
 
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Grafik Tinggi Badan Balita</h3>
-              <a href="{{ route('user.list_balita') }}">Lihat data</a>
-            </div>
-          </div>
-          <div class="card-body">
-      
-            <div class="position-relative mb-4">
-              @if (count($dataBalita) > 0)
-              <canvas id="lineChart" height="100px" width="100px"></canvas>
-              @else
-                <div class="justify-content-center d-flex ">
-                  <img src="{{ asset('asset/undraw_to_the_mooni.svg') }}" alt="" srcset="" width="30%">
-                </div>
-                <h3 class="text-center ">Tidak ada data</h3>
-              @endif
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Grafik Tinggi Badan Balita</h3>
-              <a href="{{ route('user.list_balita') }}">Lihat data</a>
-            </div>
-          </div>
-          <div class="card-body">
-      
-            <div class="position-relative mb-4">
-              @if (count($dataBalita) > 0)
-              <canvas id="lineChartBerat" height="100px" width="100px"></canvas>
-              @else
-                <div class="justify-content-center d-flex ">
-                  <img src="{{ asset('asset/undraw_to_the_mooni.svg') }}" alt="" srcset="" width="30%">
-                </div>
-                <h3 class="text-center ">Tidak ada data</h3>
-              @endif
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 </section>
 
@@ -170,6 +135,54 @@
       }
     },
   };
+
+  const labels = [
+    @foreach ($dataPemeriksaanBalita as $d)
+      @php
+        $date = date_create("$d->created_at");
+        $date = date_format($date,"F");
+      @endphp
+      '{{ $date }}',
+    @endforeach
+  ];
+
+  const dataPemeriksaanBulanan = {
+    labels: labels,
+    datasets: [
+      {
+      label: 'Balita',
+      backgroundColor: 'rgb(40, 167, 69)',
+      borderColor: 'rgb(40, 167, 69)',
+      data: [
+        @foreach ($dataPemeriksaanBalita as $d)
+          {{ $d->jumlah }},
+        @endforeach
+        ],
+      }
+    ]
+  };
+
+  const configPemeriksaanBulanan = {
+    type: 'bar',
+    data: dataPemeriksaanBulanan,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Grafik Jumlah Pemeriksaan Perbulan'
+        }
+      }
+    },
+  };
+
+  const myChart = new Chart(
+    document.getElementById('pemeriksaanBalitaChart'),
+    configPemeriksaanBulanan
+  );
 
   const pieChart = new Chart(
     document.getElementById('pieChart'),

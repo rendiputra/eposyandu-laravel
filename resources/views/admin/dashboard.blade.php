@@ -76,7 +76,7 @@
         <div class="card">
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
-              <h3 class="card-title">Grafik Jumlah Pemeriksaan Perbulan</h3>
+              <h3 class="card-title">Grafik Jumlah Pemeriksaan Perbulan (12 bulan terakhir)</h3>
               <a href="{{ route('kader.list_pemeriksaan_balita') }}">Lihat data</a>
             </div>
           </div>
